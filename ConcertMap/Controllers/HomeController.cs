@@ -8,10 +8,10 @@ namespace ConcertMap.Controllers
 {
     public class HomeController : Controller
     {
-        //comment
+        
         public ActionResult Index()
         {
-            //comment2
+            
             return View();
         }
 

@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertMap", "ConcertMap\ConcertMap.csproj", "{A631D29D-A398-4183-800A-E43F1468E20A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertService", "ConcertService\ConcertService.csproj", "{A72F9668-BA9F-4F4A-AA1C-5299EFDBA2CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A631D29D-A398-4183-800A-E43F1468E20A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A631D29D-A398-4183-800A-E43F1468E20A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A631D29D-A398-4183-800A-E43F1468E20A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A72F9668-BA9F-4F4A-AA1C-5299EFDBA2CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A72F9668-BA9F-4F4A-AA1C-5299EFDBA2CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A72F9668-BA9F-4F4A-AA1C-5299EFDBA2CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A72F9668-BA9F-4F4A-AA1C-5299EFDBA2CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
