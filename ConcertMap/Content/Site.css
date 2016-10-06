@@ -1,6 +1,13 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 20px;
     padding-bottom: 20px;
+    padding-bottom: 15px;
+    padding-bottom: 15px;
+    min-height: 100%;
+}
+
+html {
+    height: 100%
 }
 
 /* Set padding to keep content from hitting the edges */

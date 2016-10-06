@@ -1,31 +1,76 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@section Scripts {
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+    <script>
+        $(function () {
+
+            var concertData = {
+                "AF": 90.63,
+                "AL": 11.58,
+                "DZ": 158.97
+                
+            };
+
+
+            $('#world-map').vectorMap({
+                map: 'world_mill',
+                series: {
+                    regions: [{
+                        values: concertData,
+                        scale: ['#33F259', '#176326'],
+                        normalizeFunction: 'polynomial',
+                        attribute: 'fill'
+                    }]
+                },
+                zoomMax: '20',
+                zoomOnScrollSpeed: 2,
+                backgroundColor: '#A1ABB5',
+                markerStyle: {
+                    initial: {
+                        fill: '#B88A99',
+                        stroke: '#805563',
+                        r: 3
+                    }
+                },
+                markers: [
+                     {latLng: [41.90, 12.45], name: 'Vatican City'},
+                     {latLng: [43.73, 7.41], name: 'Monaco'},
+                     {latLng: [-0.52, 166.93], name: 'Nauru'},
+                     {latLng: [-8.51, 179.21], name: 'Tuvalu'},
+                     {latLng: [43.93, 12.46], name: 'San Marino'},
+                     {latLng: [47.14, 9.52], name: 'Liechtenstein'},
+                     {latLng: [7.11, 171.06], name: 'Marshall Islands'},
+                     {latLng: [17.3, -62.73], name: 'Saint Kitts and Nevis'},
+                     {latLng: [3.2, 73.22], name: 'Maldives'},
+                     {latLng: [35.88, 14.5], name: 'Malta'},
+                     {latLng: [12.05, -61.75], name: 'Grenada'},
+                     {latLng: [13.16, -61.23], name: 'Saint Vincent and the Grenadines'},
+                     {latLng: [13.16, -59.55], name: 'Barbados'},
+                     {latLng: [17.11, -61.85], name: 'Antigua and Barbuda'},
+                     {latLng: [-4.61, 55.45], name: 'Seychelles'},
+                     {latLng: [7.35, 134.46], name: 'Palau'},
+                     {latLng: [42.5, 1.51], name: 'Andorra'},
+                     {latLng: [14.01, -60.98], name: 'Saint Lucia'},
+                     {latLng: [6.91, 158.18], name: 'Federated States of Micronesia'},
+                     {latLng: [1.3, 103.8], name: 'Singapore'},
+                     {latLng: [1.46, 173.03], name: 'Kiribati'},
+                     {latLng: [-21.13, -175.2], name: 'Tonga'},
+                     {latLng: [15.3, -61.38], name: 'Dominica'},
+                     {latLng: [-20.2, 57.5], name: 'Mauritius'},
+                     {latLng: [26.02, 50.55], name: 'Bahrain'},
+                     {latLng: [0.33, 6.73], name: 'São Tomé and Príncipe' },
+                     {latLng: [36.75, 3.05], name: 'Algír' },
+                     {latLng: [47.50, 19.01], name: 'Budapest' },
+                     {latLng: [50.11, 8.65], name: 'Frankfurt' }
+                ]
+            });
+        });
+    </script>
+}
+
+<div id="world-map" style=" height: 100%"></div>
+

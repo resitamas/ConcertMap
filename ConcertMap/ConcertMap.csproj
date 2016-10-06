@@ -129,6 +129,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery-jvectormap.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -138,11 +139,23 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-jvectormap.js" />
+    <Content Include="Scripts\jquery-jvectormap.min.js" />
+    <Content Include="Scripts\jquery-jvectormap.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-mousewheel.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jVectorMaps\world-ISO-A2\jquery-jvectormap-world-mill-en-US.js" />
+    <Content Include="Scripts\jVectorMaps\world-ISO-A2\jquery-jvectormap-world-mill-en-US.min.js" />
+    <Content Include="Scripts\jVectorMaps\world-ISO-A3\jquery-jvectormap-world-mill-de-DE.js" />
+    <Content Include="Scripts\jVectorMaps\world-ISO-A3\jquery-jvectormap-world-mill-de-DE.min.js" />
+    <Content Include="Scripts\jVectorMaps\world-ISO-A3\jquery-jvectormap-world-mill-en-US.js" />
+    <Content Include="Scripts\jVectorMaps\world-ISO-A3\jquery-jvectormap-world-mill-en-US.min.js" />
+    <Content Include="Scripts\jVectorMaps\world-timezone\jquery-jvectormap-world-timezones.js" />
+    <Content Include="Scripts\jVectorMaps\world-timezone\jquery-jvectormap-world-timezones.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -161,6 +174,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jVectorMaps\world-timezone\jquery-jvectormap-world-timezones.min.js.map" />
+    <Content Include="Scripts\jVectorMaps\world-ISO-A3\jquery-jvectormap-world-mill-en-US.min.js.map" />
+    <Content Include="Scripts\jVectorMaps\world-ISO-A3\jquery-jvectormap-world-mill-de-DE.min.js.map" />
+    <Content Include="Scripts\jVectorMaps\world-ISO-A2\jquery-jvectormap-world-mill-en-US.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
