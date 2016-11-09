@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +10,17 @@ namespace ConcertService.Models
     public class Venue
     {
 
-        public string Id { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        public string CityId { get; set; }
-
+        [JsonProperty("longitude")]
         public double Long { get; set; }
 
+        [JsonProperty("latitude")]
         public double Lat { get; set; }
 
-        public string Name { get; set; }
+        [JsonProperty("country")]
+        public string Counttry { get; set; }
 
 
     }

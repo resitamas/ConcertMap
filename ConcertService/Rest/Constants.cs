@@ -12,7 +12,7 @@ namespace ConcertService.Rest
         public static readonly string URL = "http://api.bandsintown.com/";
         public static readonly string ApiVersion = "2.0";
 
-        public enum ConcertType
+        public enum EventType
         {
 
             Past, Upcoming, All

@@ -17,28 +17,29 @@ namespace ConcertService.Rest
             client = new ConcertRESTClient(Constants.URL, Constants.AppID, Constants.ApiVersion);
         }
 
-        public async Task<List<Event>> GetEvents(string artistName, Constants.ConcertType type , DateTime? fromDate = null, DateTime? toDate = null)
+        public async Task<List<Event>> GetEvents(string artistName, Constants.EventType type , DateTime? fromDate = null, DateTime? toDate = null)
         {
 
             RestResponse response = await client.ExecuteRequest(Uri.EscapeUriString("artist/" + artistName + "/events.json"),Method.GET, null, CreateQueryParams(type, fromDate, toDate)) as RestResponse;
 
-            return Deserializer.Instance.Deserialize<List<Event>>(response);
+            //return Deserializer.Instance.Deserialize<List<Event>>(response);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Event>>(response.Content);
         }
 
-        private Dictionary<string,string> CreateQueryParams(Constants.ConcertType type, DateTime? fromDate, DateTime? toDate)
+        private Dictionary<string,string> CreateQueryParams(Constants.EventType type, DateTime? fromDate, DateTime? toDate)
         {
 
             Dictionary<string, string> dict = new Dictionary<string, string>();
 
             switch (type)
             {
-                case Constants.ConcertType.Past:
+                case Constants.EventType.Past:
                     dict.Add("date", "1900-01-01,"+DateTime.Now.ToString("yyyy-mm-dd"));
                     break;
-                case Constants.ConcertType.Upcoming:
+                case Constants.EventType.Upcoming:
                     dict.Add("date", "upcoming");
                     break;
-                case Constants.ConcertType.All:
+                case Constants.EventType.All:
                     dict.Add("date", "all");
                     break;
                 default:
