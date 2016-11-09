@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertMap", "ConcertMap\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertService", "ConcertService\ConcertService.csproj", "{A72F9668-BA9F-4F4A-AA1C-5299EFDBA2CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClient", "TestClient\TestClient.csproj", "{7457E5BB-6A64-48B3-BF53-2081B73083FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A72F9668-BA9F-4F4A-AA1C-5299EFDBA2CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A72F9668-BA9F-4F4A-AA1C-5299EFDBA2CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A72F9668-BA9F-4F4A-AA1C-5299EFDBA2CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7457E5BB-6A64-48B3-BF53-2081B73083FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7457E5BB-6A64-48B3-BF53-2081B73083FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7457E5BB-6A64-48B3-BF53-2081B73083FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7457E5BB-6A64-48B3-BF53-2081B73083FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
