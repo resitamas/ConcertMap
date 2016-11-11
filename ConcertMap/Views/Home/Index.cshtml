@@ -5,6 +5,7 @@
 
 @section Scripts {
 
+    
     <script>
         $(function () {
 
@@ -70,7 +71,24 @@
                 ]
             });
         });
+
     </script>
 }
 
-<div id="world-map" style=" height: 100%"></div>
+<div id="world-map" style="height: 100%"></div>
+
+<div id="search_panel" style="position: fixed; left: 0; top: 0; height: 100%; width: 200px; background: azure; z-index: 50">
+    <h1>Search</h1>
+  
+    <form>
+        Artist<br> <input type="text" name="artist" /><button type="button">+</button><br>
+        Between<br>
+        First<br><input type="date" name="first_date" /><br>
+        Last<br><input type="date" name="last_date" /><br>
+        <input type="checkbox" name="past_future" value="future" checked />Future<br>
+        <input type="checkbox" name="past_future" value="past" checked />Past<br>
+        <input type="submit" value="Search">
+    </form>
+
+
+</div>
