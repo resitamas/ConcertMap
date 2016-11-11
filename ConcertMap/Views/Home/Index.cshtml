@@ -72,23 +72,48 @@
             });
         });
 
+
+        $(document).ready(function () {
+           
+         
+
+        });
+
+        function hide() {
+            $("#show_button").show();
+            $("#search_panel").hide();
+            
+        }
+
+
+        function show() {
+            $("#search_panel").show();
+            $("#show_button").hide();
+        }
+
+        
+
     </script>
+    <link href="/Content/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Content/Site.css">
+
 }
 
 <div id="world-map" style="height: 100%"></div>
 
-<div id="search_panel" style="position: fixed; left: 0; top: 0; height: 100%; width: 200px; background: azure; z-index: 50">
-    <h1>Search</h1>
+<div id="search_panel">
+    <div id="title">Search</div>
   
     <form>
-        Artist<br> <input type="text" name="artist" /><button type="button">+</button><br>
+        Artist<br> <input type="text" name="artist" /><button class="button">+</button><br>
         Between<br>
-        First<br><input type="date" name="first_date" /><br>
-        Last<br><input type="date" name="last_date" /><br>
+        From<br><input type="date" name="from_date" /><br>
+        To<br><input type="date" name="to_date" /><br>
         <input type="checkbox" name="past_future" value="future" checked />Future<br>
         <input type="checkbox" name="past_future" value="past" checked />Past<br>
-        <input type="submit" value="Search">
+        <input class="button" type="submit" value="Search" id="search_button">
     </form>
 
-
+    <button onclick="hide()" id="hide_button" class="button">Hide</button>
 </div>
+<button onclick="show()" id="show_button" class="button">Show</button>

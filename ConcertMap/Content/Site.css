@@ -29,3 +29,55 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+#hide_button {
+    position: absolute;
+    right:0;
+    top:50%;
+}
+
+
+#show_button {
+    position: absolute;
+    top:50%;
+    left:0;
+    display:none;
+}
+
+#search_panel {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 230px;
+    background: #edf7ee;
+    z-index: 50;
+    padding: 10px;
+    font-size: 13px;
+}
+
+#search_button {
+    position: absolute;
+    right:50%;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#title {
+    text-align:center;
+    font-size: 20px;
+    padding: 20px;
+}
+
