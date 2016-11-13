@@ -21,5 +21,7 @@ namespace ConcertMap.Models
         public Boolean isUpcoming { get; set; }
 
         public Boolean isPast { get; set; }
+
+        public List<ConcertService.Models.Event> events { get; set; }
     }
 }

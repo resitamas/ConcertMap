@@ -44,9 +44,10 @@ namespace ConcertMap.Controllers
             if (model.isUpcoming && !model.isPast) eventType = ConcertService.EventType.Upcoming;
             if (model.isPast && !model.isUpcoming) eventType = ConcertService.EventType.Past;
 
-            List<ConcertService.Models.Event> events = service.GetEvents(model.ArtistName, eventType, model.fromDate, model.toDate);
+            List<ConcertService.Models.Event> eventList = service.GetEvents(model.ArtistName, eventType, model.fromDate, model.toDate);
 
-            return View();
+            model.events = eventList;
+            return View(model);
         }
     }
 }
