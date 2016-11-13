@@ -113,6 +113,8 @@
                 Artist: @Html.TextBoxFor(model => model.ArtistName) <button class="button">+</button><br />
                 From: @Html.EditorFor(model => model.fromDate, new { @type = "date" }) <br />
                 To: @Html.EditorFor(model => model.toDate, new { @type = "date" }) <br />
+                Upcoming: @Html.CheckBoxFor(model => model.isUpcoming, new { @checked = "checked" }) <br />
+                Past: @Html.CheckBoxFor(model => model.isPast, new { @checked = "checked" }) <br />
                 <input class="button" type="submit" value="Search" id="search_button"/>
             </p>
         } 

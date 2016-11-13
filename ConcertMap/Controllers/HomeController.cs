@@ -8,6 +8,13 @@ namespace ConcertMap.Controllers
 {
     public class HomeController : Controller
     {
+
+        private ConcertService.Rest.RestHelper service;
+
+        public HomeController()
+        {
+            service = new ConcertService.Rest.RestHelper();
+        }
         
         public ActionResult Index()
         {
@@ -33,9 +40,13 @@ namespace ConcertMap.Controllers
         [HttpPost]
         public ActionResult Search(Models.Events model)
         {
-            //model.ArtistName..
-            
-            return View(model);
+            ConcertService.EventType eventType = ConcertService.EventType.All;
+            if (model.isUpcoming && !model.isPast) eventType = ConcertService.EventType.Upcoming;
+            if (model.isPast && !model.isUpcoming) eventType = ConcertService.EventType.Past;
+
+            List<ConcertService.Models.Event> events = service.GetEvents(model.ArtistName, eventType, model.fromDate, model.toDate);
+
+            return View();
         }
     }
 }
