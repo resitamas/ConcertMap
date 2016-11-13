@@ -3,6 +3,8 @@
     
 }
 
+@model ConcertMap.Models.Events
+
 @section Scripts {
 
     
@@ -104,15 +106,28 @@
 <div id="search_panel">
     <div id="title">Search</div>
   
-    <form>
+    <div id="search_form">
+        @using (Html.BeginForm("Search", "HomeController", FormMethod.Post))
+        {
+            <p>
+                Artist: @Html.TextBoxFor(model => model.ArtistName) <button class="button">+</button><br />
+                From: @Html.EditorFor(model => model.fromDate, new { @type = "date" }) <br />
+                To: @Html.EditorFor(model => model.toDate, new { @type = "date" }) <br />
+                <input class="button" type="submit" value="Search" id="search_button"/>
+            </p>
+        } 
+    </div>
+    
+
+    @*<form>
         Artist<br> <input type="text" name="artist" /><button class="button">+</button><br>
         Between<br>
         From<br><input type="date" name="from_date" /><br>
         To<br><input type="date" name="to_date" /><br>
-        <input type="checkbox" name="past_future" value="future" checked />Future<br>
-        <input type="checkbox" name="past_future" value="past" checked />Past<br>
+        <input type="checkbox" name="past_future" value="future" checked/>Future<br>
+        <input type="checkbox" name="past_future" value="past" checked/>Past<br>
         <input class="button" type="submit" value="Search" id="search_button">
-    </form>
+    </form>*@
 
     <button onclick="hide()" id="hide_button" class="button">Hide</button>
 </div>

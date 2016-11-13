@@ -28,5 +28,14 @@ namespace ConcertMap.Controllers
 
             return View();
         }
+
+
+        [HttpPost]
+        public ActionResult Search(Models.Events model)
+        {
+            //model.ArtistName..
+            
+            return View(model);
+        }
     }
 }
