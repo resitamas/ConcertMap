@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ConcertMap.Models;
+using ConcertService.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,8 +20,8 @@ namespace ConcertMap.Controllers
         
         public ActionResult Index()
         {
-            
-            return View();
+
+            return View(new Events() { events = new List<Event>() });
         }
 
         public ActionResult About()
@@ -38,7 +40,7 @@ namespace ConcertMap.Controllers
 
 
         [HttpPost]
-        public ActionResult Search(Models.Events model)
+        public ActionResult Search(Events model)
         {
             ConcertService.EventType eventType = ConcertService.EventType.All;
             if (model.isUpcoming && !model.isPast) eventType = ConcertService.EventType.Upcoming;
