@@ -1,6 +1,6 @@
 ﻿using ConcertMap.Models;
 using ConcertService.Models;
-using CountriesService;
+//using CountriesService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,20 +19,46 @@ namespace ConcertMap.Controllers
             service = new ConcertService.Rest.RestHelper();
         }
         
-        public ActionResult Index()
+        public ActionResult Index(String artist = null, DateTime? fromDate = null, DateTime? toDate = null, Boolean isPast = true, Boolean isUpcoming = true)
         {
+            Events model = new Events();
 
-            var events = new Events();
+            if (artist == null)
+            {
+                model.fromDate = Convert.ToDateTime("1900-01-01 00:00:01");
+                model.toDate = Convert.ToDateTime("2100-01-01 00:00:01");
+                model.isUpcoming = true;
+                model.isPast = true;
 
-            events.events = new List<Event>();
-            events.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
-            events.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
-            events.events.Add(new Event() {Venue = new Venue() { Country = "Italy", Lat=20, Long=20, Name = "" } });
-            events.events.Add(new Event() {Venue = new Venue() { Country = "United States", Lat=20, Long=20, Name = "" } });
-            events.events.Add(new Event() {Venue = new Venue() { Country = "Italy", Lat=20, Long=20, Name = "" } });
-            events.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
+                return View(model);
+            }
 
-            return View(events);
+            if (isPast && !isUpcoming) model.toDate = DateTime.Now;
+            if (!isPast && isUpcoming) model.fromDate = DateTime.Now;
+
+            List<ConcertService.Models.Event> eventList = service.GetEvents(artist, model.fromDate, model.toDate);
+
+            model.events = eventList;
+            model.ArtistName = artist;
+            model.fromDate = fromDate;
+            model.toDate = toDate;
+            model.isPast = isPast;
+            model.isUpcoming = isUpcoming;
+
+
+
+            //var events2 = new Events();
+
+            //events2.events = new List<Event>();
+            //events2.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
+            //events2.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
+            //events2.events.Add(new Event() {Venue = new Venue() { Country = "Italy", Lat=20, Long=20, Name = "" } });
+            //events2.events.Add(new Event() {Venue = new Venue() { Country = "United States", Lat=20, Long=20, Name = "" } });
+            //events2.events.Add(new Event() {Venue = new Venue() { Country = "Italy", Lat=20, Long=20, Name = "" } });
+            //events2.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
+
+            //model.events = events2.events;
+            return View(model);
         }
 
         public ActionResult About()
@@ -50,17 +76,11 @@ namespace ConcertMap.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult Search(Events model)
+        [HttpGet]
+        public ActionResult Search(Events m)
         {
-            ConcertService.EventType eventType = ConcertService.EventType.All;
-            if (model.isUpcoming && !model.isPast) eventType = ConcertService.EventType.Upcoming;
-            if (model.isPast && !model.isUpcoming) eventType = ConcertService.EventType.Past;
-
-            List<ConcertService.Models.Event> eventList = service.GetEvents(model.ArtistName, eventType, model.fromDate, model.toDate);
-
-            model.events = eventList;
-            return View(model);
+            return RedirectToAction("Index", "Home", new { artist = m.ArtistName, fromDate = m.fromDate, toDate = m.toDate, isPast = m.isPast, isUpcoming = m.isUpcoming });
         }
     }
+    
 }

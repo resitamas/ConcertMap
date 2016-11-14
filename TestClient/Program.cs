@@ -25,7 +25,7 @@ namespace TestClient
         {
             RestHelper helper = new RestHelper();
             
-            Task<List<Event>> t = helper.GetEventsAsync("Skrillex", EventType.All);
+            Task<List<Event>> t = helper.GetEventsAsync("Skrillex");
 
             Console.WriteLine("Kérés feldolgozása...");
 
@@ -46,7 +46,7 @@ namespace TestClient
 
             Console.WriteLine("Kérés feldolgozása...");
 
-            List<Event> events = helper.GetEvents("Skrillex", EventType.All);
+            List<Event> events = helper.GetEvents("Skrillex");
 
             foreach (var e in events)
             {
