@@ -12,16 +12,17 @@ namespace ConcertMap.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime fromDate { get; set; }
+        public DateTime? fromDate { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime toDate { get; set; }
+        public DateTime? toDate { get; set; }
 
         public Boolean isUpcoming { get; set; }
 
         public Boolean isPast { get; set; }
 
         public List<ConcertService.Models.Event> events { get; set; }
+
     }
 }

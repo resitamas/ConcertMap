@@ -12,10 +12,10 @@ namespace ConcertService.Rest
     {
         
 
-        public async Task<List<Event>> GetEventsAsync(string artistName, EventType type , DateTime? fromDate = null, DateTime? toDate = null)
+        public async Task<List<Event>> GetEventsAsync(string artistName, DateTime? fromDate = null, DateTime? toDate = null)
         {
 
-            RestResponse response = await client.ExecuteRequestAsync(Uri.EscapeUriString("artists/" + artistName + "/events.json"),Method.GET, null, CreateQueryParams(type, fromDate, toDate)) as RestResponse;
+            RestResponse response = await client.ExecuteRequestAsync(Uri.EscapeUriString("artists/" + artistName + "/events.json"),Method.GET, null, CreateQueryParams(fromDate, toDate)) as RestResponse;
 
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Event>>(response.Content);
         }

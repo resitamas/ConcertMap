@@ -107,7 +107,7 @@
     <div id="title">Search</div>
   
     <div id="search_form">
-        @using (Html.BeginForm("Search", "HomeController", FormMethod.Post))
+        @using (Html.BeginForm("Search", "Home", FormMethod.Get))
         {
             <p>
                 Artist: @Html.TextBoxFor(model => model.ArtistName) <button class="button">+</button><br />
@@ -119,7 +119,6 @@
             </p>
         } 
     </div>
-    
 
     <button onclick="hide()" id="hide_button" class="button">Hide</button>
 </div>
