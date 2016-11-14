@@ -1,5 +1,7 @@
-﻿using ConcertMap.Models;
+﻿using ConcertMap.Controllers;
+using ConcertMap.Models;
 using ConcertService.Models;
+using CountriesService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace ConcertMap.App_Code.Helper
     public class MapManager
     {
 
-        public static List<Marker> GetMatkers(List<Event> events)
+        public static List<Marker> GetMarkers(List<Event> events)
         {
 
             List<Marker> markers = new List<Marker>();
@@ -24,8 +26,30 @@ namespace ConcertMap.App_Code.Helper
             markers.Add(new Marker() { Name = "Vatican City", Lat = 41.90, Long = 12.45 });
 
             return markers;
+        }
 
-            //return "[{latLng: [41.90, 12.45], name: 'Vatican City'},{latLng: [43.73, 7.41], name: 'Monaco'},{latLng: [-0.52, 166.93], name: 'Nauru'}]";
+        public static Dictionary<string, double> CreateCountryData(List<Event> events)
+        {
+            Dictionary<string, double> countryData = new Dictionary<string, double>();
+
+            List<ReducedCountry> countries = CountryManager.GetCountries().ToList();
+
+            foreach (var e in events)
+            {
+
+                var country = countries.Where(c => c.OfficalName == e.Venue.Country || c.CommonName == e.Venue.Country).FirstOrDefault();
+
+                if (country != null)
+                {
+                    if (!countryData.ContainsKey(country.Code))
+                    {
+                        countryData.Add(country.Code,events.Count(ev => ev.Venue.Country == e.Venue.Country));
+                    }
+                }
+               
+            }
+
+            return countryData;
         }
 
 

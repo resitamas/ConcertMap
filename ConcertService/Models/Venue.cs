@@ -20,7 +20,7 @@ namespace ConcertService.Models
         public double Lat { get; set; }
 
         [JsonProperty("country")]
-        public string Counttry { get; set; }
+        public string Country { get; set; }
 
 
     }

@@ -12,12 +12,14 @@
     <script>
         $(function () {
 
-            var concertData = {
-                "AF": 90.63,
-                "AL": 11.58,
-                "DZ": 158.97
+            //var concertData = {
+            //    "AF": 90.63,
+            //    "AL": 11.58,
+            //    "DZ": 158.97
 
-            };
+            //};
+
+            var concertData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(MapManager.CreateCountryData(Model.events)));
 
             var mapObj = new jvm.Map({
 
@@ -44,7 +46,7 @@
             });
 
             //Add markers to map
-            var markers = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(MapManager.GetMatkers(Model.events)))
+            var markers = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(MapManager.GetMarkers(Model.events)))
             mapObj.addMarkers(markers, []);
 
 

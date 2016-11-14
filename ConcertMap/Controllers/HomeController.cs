@@ -1,5 +1,6 @@
 ﻿using ConcertMap.Models;
 using ConcertService.Models;
+using CountriesService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,17 @@ namespace ConcertMap.Controllers
         public ActionResult Index()
         {
 
-            return View(new Events() { events = new List<Event>() });
+            var events = new Events();
+
+            events.events = new List<Event>();
+            events.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
+            events.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
+            events.events.Add(new Event() {Venue = new Venue() { Country = "Italy", Lat=20, Long=20, Name = "" } });
+            events.events.Add(new Event() {Venue = new Venue() { Country = "United States", Lat=20, Long=20, Name = "" } });
+            events.events.Add(new Event() {Venue = new Venue() { Country = "Italy", Lat=20, Long=20, Name = "" } });
+            events.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
+
+            return View(events);
         }
 
         public ActionResult About()
