@@ -43,7 +43,7 @@ textarea {
     position: absolute;
     top:50%;
     left:0;
-    display:none;
+    display: inline-block;
 }
 
 #search_panel {
@@ -56,6 +56,7 @@ textarea {
     z-index: 50;
     padding: 10px;
     font-size: 13px;
+    display: none;
 }
 
 #search_button {
@@ -80,5 +81,22 @@ textarea {
     text-align:center;
     font-size: 20px;
     padding: 20px;
+}
+
+.showSearchPanelButton{
+    background-color: #333333;
+    margin-left: 20px
+}
+
+.showStatPanelButton{
+    background-color: #333333;
+    margin-right: 20px
+}
+
+#stat_button {
+    position: absolute;
+    top:50%;
+    right:0;
+    display:inline-block;
 }
 

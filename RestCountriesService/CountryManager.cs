@@ -22,14 +22,15 @@ namespace CountriesService
         public static IEnumerable<ReducedCountry> GetCountries()
         {
             List<ReducedCountry> countries = new List<ReducedCountry>();
-
+            var uk = Country.UnitedKingdom;
 
             foreach (var country in Country.All.ToList())
             {
 
                 countries.Add(new ReducedCountry() {
 
-                    Code = country.CountryCode.ToString(),
+                    ISO2 = country.CountryCode.ToString(),
+                    ISO3 = country.ISO3.ToString(),
                     CommonName = country.CommonName,
                     OfficalName = country.OfficialName,
                     Region = country.Region

@@ -17,7 +17,7 @@ namespace ConcertMap
 
             bundles.Add(new ScriptBundle("~/bundles/jvectormap").Include(
                         "~/Scripts/jquery-jvectormap.js",
-                        "~/Scripts/jquery-mousewheel.js").IncludeDirectory("~/Scripts/jVectorMaps/world-ISO-A2","*.js",true));
+                        "~/Scripts/jquery-mousewheel.js").IncludeDirectory("~/Scripts/jVectorMaps/world-ISO-A3","*US.js",true));
 
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

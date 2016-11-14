@@ -11,7 +11,11 @@
     
     <script>
         $(function () {
-            
+
+            $("#fromDate").attr("disabled","disabled");
+            $("#toDate").attr("disabled","disabled");
+
+
             var markers = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(MapManager.GetMarkers(Model.events)))
             var concertData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(MapManager.CreateCountryData(Model.events)));
 
@@ -44,16 +48,63 @@
 
         function hide() {
             $("#show_button").show();
-            //$("#search_panel").hide();
             $("#search_panel").hide("drop",{ direction: "left" }, "slow" );
 
         }
 
 
         function show() {
-            //$("#search_panel").show();
             $("#search_panel").show("drop",{ direction: "left" }, "slow" );
             $("#show_button").hide();
+        }
+
+
+        function upcomingChanged(cb) {
+
+            var isChecked = $(cb).prop("checked");
+
+            if (isChecked) {
+                $("#fromDate").val(getCurrentDate());
+                $("#fromDate").attr("disabled","disabled");
+            } else
+            {
+                $("#fromDate").removeAttr("disabled");
+            }
+
+        }
+
+        function pastChanged(cb) {
+            
+            var isChecked = $(cb).prop("checked");
+
+            if (isChecked) {
+                $("#toDate").val(getCurrentDate());
+                $("#toDate").attr("disabled","disabled");
+            } else {
+                $("#toDate").removeAttr("disabled");
+            }
+        }
+
+        function showStat() {
+    
+        }
+
+        function getCurrentDate() {
+    
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; 
+
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                dd='0'+dd
+            } 
+            if(mm<10){
+                mm='0'+mm
+            } 
+            var today = yyyy+"-"+mm+"-"+dd;
+            
+            return today;
         }
 
     </script>
@@ -69,10 +120,10 @@
         {
             <p>
                 Artist: @Html.TextBoxFor(model => model.ArtistName) <button class="button">+</button><br />
-                From: @Html.EditorFor(model => model.fromDate, new { @type = "date" }) <br />
-                To: @Html.EditorFor(model => model.toDate, new { @type = "date" }) <br />
-                Upcoming: @Html.CheckBoxFor(model => model.isUpcoming, new { @checked = "checked" }) <br />
-                Past: @Html.CheckBoxFor(model => model.isPast, new { @checked = "checked" }) <br />
+                From: @Html.EditorFor(model => model.fromDate, new { @type = "date", id="fromDate"}) <br />
+                To: @Html.EditorFor(model => model.toDate, new { @type = "date", id = "toDate"}) <br />
+                Upcoming: @Html.CheckBoxFor(model => model.isUpcoming, new { @checked = "checked", id = "upcoming", onclick="upcomingChanged(this)" }) <br />
+                Past: @Html.CheckBoxFor(model => model.isPast, new { @checked = "checked", id = "past", onclick = "pastChanged(this)" }) <br />
                 <input class="button" type="submit" value="Search" id="search_button"/>
             </p>
         } 
@@ -80,4 +131,6 @@
 
     <button onclick="hide()" id="hide_button" class="button">Hide</button>
 </div>
-<button onclick="show()" id="show_button" class="button">Show</button>
+<button onclick="show()" id="show_button" class="button showSearchPanelButton">Search</button>
+
+<button onclick="showStat()" id="stat_button" class="button showStatPanelButton">Stat</button>

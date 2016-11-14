@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConcertException.cs" />
     <Compile Include="Emums.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Venue.cs" />

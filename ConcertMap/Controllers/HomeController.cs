@@ -1,4 +1,5 @@
 ﻿using ConcertMap.Models;
+using ConcertService;
 using ConcertService.Models;
 //using CountriesService;
 using System;
@@ -19,7 +20,7 @@ namespace ConcertMap.Controllers
             service = new ConcertService.Rest.RestHelper();
         }
         
-        public ActionResult Index(String artist = null, DateTime? fromDate = null, DateTime? toDate = null, Boolean isPast = true, Boolean isUpcoming = true)
+        public ActionResult Index(string artist = null, DateTime? fromDate = null, DateTime? toDate = null, bool isPast = true, bool isUpcoming = true)
         {
             Events model = new Events();
 
@@ -36,7 +37,20 @@ namespace ConcertMap.Controllers
             if (isPast && !isUpcoming) model.toDate = DateTime.Now;
             if (!isPast && isUpcoming) model.fromDate = DateTime.Now;
 
-            List<ConcertService.Models.Event> eventList = service.GetEvents(artist, model.fromDate, model.toDate);
+            List<Event> eventList = new List<Event>(); ;
+
+            try
+            {
+                 eventList = service.GetEvents(artist, model.fromDate, model.toDate);
+            }
+            catch (ConcertException ex)
+            {
+                //Nincs ilyen előadó
+            }
+            catch (Exception)
+            {
+                //Más kívétel
+            }
 
             model.events = eventList;
             model.ArtistName = artist;
@@ -45,19 +59,6 @@ namespace ConcertMap.Controllers
             model.isPast = isPast;
             model.isUpcoming = isUpcoming;
 
-
-
-            //var events2 = new Events();
-
-            //events2.events = new List<Event>();
-            //events2.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
-            //events2.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
-            //events2.events.Add(new Event() {Venue = new Venue() { Country = "Italy", Lat=20, Long=20, Name = "" } });
-            //events2.events.Add(new Event() {Venue = new Venue() { Country = "United States", Lat=20, Long=20, Name = "" } });
-            //events2.events.Add(new Event() {Venue = new Venue() { Country = "Italy", Lat=20, Long=20, Name = "" } });
-            //events2.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
-
-            //model.events = events2.events;
             return View(model);
         }
 

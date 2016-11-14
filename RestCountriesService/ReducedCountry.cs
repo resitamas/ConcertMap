@@ -12,7 +12,9 @@ namespace CountriesService
 
         public string OfficalName { get; set; }
 
-        public string Code { get; set; }
+        public string ISO2 { get; set; }
+
+        public string ISO3 { get; set; }
 
         public string Region { get; set; }
 

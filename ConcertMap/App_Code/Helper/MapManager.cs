@@ -25,8 +25,6 @@ namespace ConcertMap.App_Code.Helper
                 }
             }
 
-            markers.Add(new Marker() { Name = "Vatican City", Lat = 41.90, Long = 12.45 });
-
             return markers;
         }
 
@@ -36,7 +34,8 @@ namespace ConcertMap.App_Code.Helper
 
             List<ReducedCountry> countries = CountryManager.GetCountries().ToList();
 
-            if (events != null) {
+            if (events != null)
+            {
                 foreach (var e in events)
                 {
 
@@ -44,14 +43,14 @@ namespace ConcertMap.App_Code.Helper
 
                     if (country != null)
                     {
-                        if (!countryData.ContainsKey(country.Code))
+                        if (!countryData.ContainsKey(country.ISO3))
                         {
-                            countryData.Add(country.Code, events.Count(ev => ev.Venue.Country == e.Venue.Country));
+                            countryData.Add(country.ISO3, events.Count(ev => ev.Venue.Country == e.Venue.Country));
                         }
                     }
 
-                 }
-        }
+                }
+            }
 
             return countryData;
         }
