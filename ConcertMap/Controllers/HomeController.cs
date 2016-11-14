@@ -36,7 +36,7 @@ namespace ConcertMap.Controllers
             if (isPast && !isUpcoming) model.toDate = DateTime.Now;
             if (!isPast && isUpcoming) model.fromDate = DateTime.Now;
 
-            List<ConcertService.Models.Event> eventList = service.GetEvents(artist, model.fromDate, model.toDate);
+            List<ConcertService.Models.Event> eventList = service.GetEvents(artist);
 
             model.events = eventList;
             model.ArtistName = artist;
