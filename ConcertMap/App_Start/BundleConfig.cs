@@ -34,6 +34,12 @@ namespace ConcertMap
                       "~/Content/site.css",
                       "~/Content/jquery-jvectormap.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                      "~/Scripts/jquery-ui-{version}.js"));
+
+            bundles.Add(new StyleBundle("~/Content/jqueryui").IncludeDirectory(
+                      "~/Content/themes","*.css",true));
+
         }
     }
 }
