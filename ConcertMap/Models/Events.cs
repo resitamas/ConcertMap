@@ -13,11 +13,11 @@ namespace ConcertMap.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime fromDate { get; set; }
+        public DateTime? fromDate { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime toDate { get; set; }
+        public DateTime? toDate { get; set; }
 
         public bool isUpcoming { get; set; }
 

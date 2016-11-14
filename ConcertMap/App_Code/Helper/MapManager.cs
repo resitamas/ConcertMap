@@ -17,10 +17,12 @@ namespace ConcertMap.App_Code.Helper
 
             List<Marker> markers = new List<Marker>();
 
-
-            foreach (var e in events)
+            if (events != null)
             {
-                markers.Add(new Marker() { Name = e.Title, Lat = e.Venue.Lat, Long = e.Venue.Long });
+                foreach (var e in events)
+                {
+                    markers.Add(new Marker() { Name = e.Title, Lat = e.Venue.Lat, Long = e.Venue.Long });
+                }
             }
 
             markers.Add(new Marker() { Name = "Vatican City", Lat = 41.90, Long = 12.45 });
@@ -34,20 +36,22 @@ namespace ConcertMap.App_Code.Helper
 
             List<ReducedCountry> countries = CountryManager.GetCountries().ToList();
 
-            foreach (var e in events)
-            {
-
-                var country = countries.Where(c => c.OfficalName == e.Venue.Country || c.CommonName == e.Venue.Country).FirstOrDefault();
-
-                if (country != null)
+            if (events != null) {
+                foreach (var e in events)
                 {
-                    if (!countryData.ContainsKey(country.Code))
+
+                    var country = countries.Where(c => c.OfficalName == e.Venue.Country || c.CommonName == e.Venue.Country).FirstOrDefault();
+
+                    if (country != null)
                     {
-                        countryData.Add(country.Code,events.Count(ev => ev.Venue.Country == e.Venue.Country));
+                        if (!countryData.ContainsKey(country.Code))
+                        {
+                            countryData.Add(country.Code, events.Count(ev => ev.Venue.Country == e.Venue.Country));
+                        }
                     }
-                }
-               
-            }
+
+                 }
+        }
 
             return countryData;
         }

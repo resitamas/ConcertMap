@@ -22,30 +22,30 @@ namespace ConcertService.Rest
         }
 
 
-        protected Dictionary<string, string> CreateQueryParams(EventType type, DateTime? fromDate, DateTime? toDate)
+        protected Dictionary<string, string> CreateQueryParams(DateTime? fromDate, DateTime? toDate)
         {
 
             Dictionary<string, string> dict = new Dictionary<string, string>();
 
-            switch (type)
-            {
-                case EventType.Past:
-                    dict.Add("date", "1900-01-01," + DateTime.Now.ToString("yyyy-mm-dd"));
-                    break;
-                case EventType.Upcoming:
-                    dict.Add("date", "upcoming");
-                    break;
-                case EventType.All:
-                    dict.Add("date", "all");
-                    break;
-                default:
-                    if (fromDate.HasValue && toDate.HasValue)
-                    {
-                        dict.Add("date", fromDate.Value.ToString("yyyy-mm-dd") + "," + toDate.Value.ToString("yyyy-mm-dd"));
-                    }
+            //switch (type)
+            //{
+            //    case EventType.Past:
+            //        dict.Add("date", "1900-01-01," + DateTime.Now.ToString("yyyy-mm-dd"));
+            //        break;
+            //    case EventType.Upcoming:
+            //        dict.Add("date", "upcoming");
+            //        break;
+            //    case EventType.All:
+            //        dict.Add("date", "all");
+            //        break;
+            //    default:
+            //        if (fromDate.HasValue && toDate.HasValue)
+            //        {
+            //            dict.Add("date", fromDate.Value.ToString("yyyy-mm-dd") + "," + toDate.Value.ToString("yyyy-mm-dd"));
+            //        }
 
-                    break;
-            }
+            //        break;
+            //}
 
             return dict;
 
