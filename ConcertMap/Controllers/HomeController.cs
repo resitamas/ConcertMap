@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ConcertMap.Models;
+using ConcertService.Models;
+using CountriesService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,36 +17,22 @@ namespace ConcertMap.Controllers
         public HomeController()
         {
             service = new ConcertService.Rest.RestHelper();
-           
         }
         
-        public ActionResult Index(String artist = null, DateTime? fromDate = null, DateTime? toDate = null, Boolean isPast=true, Boolean isUpcoming=true)
+        public ActionResult Index()
         {
-            Models.Events model = new Models.Events();
 
-            if (artist == null)
-            {
-                model.fromDate = Convert.ToDateTime("1900-01-01 00:00:01");
-                model.toDate = Convert.ToDateTime("2100-01-01 00:00:01");
-                model.isUpcoming = true;
-                model.isPast = true;
+            var events = new Events();
 
-                return View(model);
-            }
+            events.events = new List<Event>();
+            events.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
+            events.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
+            events.events.Add(new Event() {Venue = new Venue() { Country = "Italy", Lat=20, Long=20, Name = "" } });
+            events.events.Add(new Event() {Venue = new Venue() { Country = "United States", Lat=20, Long=20, Name = "" } });
+            events.events.Add(new Event() {Venue = new Venue() { Country = "Italy", Lat=20, Long=20, Name = "" } });
+            events.events.Add(new Event() {Venue = new Venue() { Country = "Hungary", Lat=20, Long=20, Name = "" } });
 
-            if (isPast && !isUpcoming) model.toDate = DateTime.Now;
-            if (!isPast && isUpcoming) model.fromDate = DateTime.Now;
-
-            List<ConcertService.Models.Event> eventList = service.GetEvents(artist, model.fromDate, model.toDate);
-
-            model.events = eventList;
-            model.ArtistName = artist;
-            model.fromDate = fromDate;
-            model.toDate = toDate;
-            model.isPast = isPast;
-            model.isUpcoming = isUpcoming;
-
-            return View(model);
+            return View(events);
         }
 
         public ActionResult About()
@@ -61,10 +50,17 @@ namespace ConcertMap.Controllers
         }
 
 
-        [HttpGet]
-        public ActionResult Search(Models.Events m)
+        [HttpPost]
+        public ActionResult Search(Events model)
         {
-            return RedirectToAction("Index", "Home", new { artist = m.ArtistName, fromDate = m.fromDate, toDate = m.toDate, isPast = m.isPast, isUpcoming = m.isUpcoming} );
+            ConcertService.EventType eventType = ConcertService.EventType.All;
+            if (model.isUpcoming && !model.isPast) eventType = ConcertService.EventType.Upcoming;
+            if (model.isPast && !model.isUpcoming) eventType = ConcertService.EventType.Past;
+
+            List<ConcertService.Models.Event> eventList = service.GetEvents(model.ArtistName, eventType, model.fromDate, model.toDate);
+
+            model.events = eventList;
+            return View(model);
         }
     }
 }
