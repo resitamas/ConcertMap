@@ -13,7 +13,7 @@ namespace CountriesService
         public static IEnumerable<ReducedCountry> GetCountries()
         {
             List<ReducedCountry> countries = new List<ReducedCountry>();
-            var srb = Country.Serbia;
+            var srb = Country.UnitedStates;
             foreach (var country in Country.All.ToList())
             {
 

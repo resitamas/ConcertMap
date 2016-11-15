@@ -61,9 +61,9 @@ namespace ConcertMap.App_Code.Helper
 
             Stat stat = new Stat()
             {
-                CityStat = new Dictionary<string, int>(),
-                CountryStat = new Dictionary<string, int>(),
-                RegionStat = new Dictionary<string, int>()
+                CityStat = new List<ChartModel>(),
+                CountryStat = new List<ChartModel>(),
+                RegionStat = new List<ChartModel>()
             };
 
             Dictionary<string, double> countrystat = new Dictionary<string, double>();
@@ -77,20 +77,25 @@ namespace ConcertMap.App_Code.Helper
                     var value = Convert.ToInt32(d.Value);
 
                     //Create country stat
-                    stat.CountryStat.Add(countries.Where(c => c.ISO3 == d.Key).First().CommonName, value);
+                    stat.CountryStat.Add(new ChartModel() {
+                        Y = value,
+                        Name = countries.Where(c => c.ISO3 == d.Key).First().CommonName,
+                    }); 
 
                     //Create region stat
                     var region = countries.Where(c => c.ISO3 == d.Key).First().Region;
 
-                    if (stat.RegionStat.ContainsKey(region))
+                    if (stat.RegionStat.Exists(r => r.Name == region))
                     {
-                        stat.RegionStat[region] += value;
+                        stat.RegionStat.Find(r => r.Name == region).Y += Convert.ToInt32(d.Value);
                     }
                     else
                     {
-                        stat.RegionStat.Add(region, value);
+                        stat.RegionStat.Add(new ChartModel() {
+                            Y = 1,
+                            Name = region,
+                        });
                     }
-
                 }
 
             }
@@ -103,18 +108,25 @@ namespace ConcertMap.App_Code.Helper
                     {
                         var city = e.Venue.City;
 
-                        if (stat.CityStat.ContainsKey(city))
+                        if (stat.CityStat.Exists(c => c.Name == city))
                         {
-                            stat.CityStat[city] ++;
+                            stat.CityStat.Find(c => c.Name == city).Y ++;
                         }
                         else
                         {
-                            stat.CityStat.Add(city, 1);
+                            stat.CityStat.Add(new ChartModel() {
+                                Y = 1,
+                                Name = city
+                            });
                         }
                     }
                 }
             }
 
+
+            stat.CityStat = stat.CityStat.OrderBy(c => c.Y).ToList();
+            stat.CountryStat = stat.CountryStat.OrderBy(c => c.Y).ToList();
+            stat.RegionStat = stat.RegionStat.OrderBy(c => c.Y).ToList();
 
             return stat;
         }

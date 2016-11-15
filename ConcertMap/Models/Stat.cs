@@ -8,11 +8,11 @@ namespace ConcertMap.Models
     public class Stat
     {
 
-        public Dictionary<string,int> CityStat { get; set; }
+        public List<ChartModel> CityStat { get; set; }
 
-        public Dictionary<string,int> CountryStat { get; set; }
+        public List<ChartModel> CountryStat { get; set; }
 
-        public Dictionary<string,int> RegionStat { get; set; }
+        public List<ChartModel> RegionStat { get; set; }
 
     }
 }

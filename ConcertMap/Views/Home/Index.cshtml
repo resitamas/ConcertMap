@@ -29,10 +29,18 @@
                 var stat = MapManager.CreateStat(concertData, Model.events);
 
 
-            } 
+            }
 
             var markersDataSerialized = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(markersData))
             var concertDataSerialized = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(concertData));
+
+            localStorage.setItem("cityStat",JSON.stringify(@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(stat.CityStat))));
+            localStorage.setItem("countryStat",JSON.stringify(@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(stat.CountryStat))));
+            localStorage.setItem("regionStat",JSON.stringify(@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(stat.RegionStat))));
+            localStorage.setItem("cityStatCount",@stat.CityStat.Count);
+            localStorage.setItem("countryStatCount",@stat.CountryStat.Count);
+            localStorage.setItem("regionStatCount",@stat.RegionStat.Count);
+
 
             var mapObj = new jvm.Map({
 
@@ -87,18 +95,18 @@
                 if (!isCheckedPast)
                     $("#fromDate").val(getCurrentDate());
                 $("#toDate").val("2100-01-01");
-                
+
             } else
             {
                 if (isCheckedPast) $("#fromDate").val("1900-01-01");
                 $("#toDate").val(getCurrentDate());
-               
+
             }
 
         }
 
         function pastChanged(cb) {
-            
+
             var isChecked = $(cb).prop("checked");
             var isCheckedUpcoming = $("#upcoming").prop("checked");
 
@@ -106,11 +114,11 @@
                 if (!isCheckedUpcoming)
                     $("#toDate").val(getCurrentDate());
                 $("#fromDate").val("1900-01-01");
-                
+
             } else {
                 if (isCheckedUpcoming) $("#toDate").val("2100-01-01");
                 $("#fromDate").val(getCurrentDate());
-                
+
             }
         }
 
@@ -141,23 +149,27 @@
         }
 
         function statPanelShowed() {
-    
+
             //$("regionChart").css("display","block");
 
-            var regionChart = createChart("regionChart","Region stat");
+            var regionChart = createChart("regionChart","Region stat", JSON.parse(localStorage.getItem("regionStat")), getHeight(localStorage.getItem("regionStatCount")));
 
-            var countryChart = createChart("countryChart","Country Stat");
-            
-            var cityChart = createChart("cityChart","City Stat");
+            var countryChart = createChart("countryChart","Country Stat",JSON.parse(localStorage.getItem("countryStat")), getHeight(localStorage.getItem("countryStatCount")));
+
+            var cityChart = createChart("cityChart","City Stat", JSON.parse(localStorage.getItem("cityStat")), getHeight(localStorage.getItem("cityStatCount")));
 
             regionChart.render();
             countryChart.render();
             cityChart.render();
-            
+
         }
 
-        function createChart(containerName, titleText) {
-    
+        function getHeight(count) {
+            return count * 20;
+        }
+
+        function createChart(containerName, titleText, dataPoints, height) {
+
             var chart = new CanvasJS.Chart(containerName, {
                 title: {
                     text: titleText,
@@ -167,43 +179,35 @@
 
                 },
                 width: 300,
+                height: height,
                 animationEnabled: true,
                 backgroundColor: '#edf7ee',
                 axisY: {
                     tickThickness: 0,
                     lineThickness: 0,
                     valueFormatString: " ",
-                    gridThickness: 0                    
+                    gridThickness: 0
                 },
                 axisX: {
                     tickThickness: 0,
                     lineThickness: 0,
-                    labelFontSize: 18,
+                    labelFontSize: 10,
                     labelFontColor: "Peru",
                     interval:1
                 },
                 data: [
                 {
-                    indexLabelFontSize: 26,
-                    toolTipContent: "<span style='\"'color: {color};'\"'><strong>{indexLabel}</strong></span><span style='\"'font-size: 20px; color:peru '\"'><strong>{y}</strong></span>",
+                    indexLabelFontSize: 12,
+                    toolTipContent: "<span style='\"'color: {color};'\"'><strong>{label}</strong></span>",
 
                     indexLabelPlacement: "inside",
+                    indexLabelWrap: true,
                     indexLabelFontColor: "white",
-                    indexLabelFontWeight: 600,
+                    indexLabelFontWeight: 100,
                     indexLabelFontFamily: "Verdana",
                     color: "#62C9C3",
                     type: "bar",
-                    dataPoints: [
-                        { y: 21, label: "21%", indexLabel: "Video" },
-                        { y: 25, label: "25%", indexLabel: "Dining" },
-                        { y: 33, label: "33%", indexLabel: "Entertainment" },
-                        { y: 36, label: "36%", indexLabel: "News" },
-                        { y: 42, label: "42%", indexLabel: "Music" },
-                        { y: 49, label: "49%", indexLabel: "Social Networking" },
-                        { y: 50, label: "50%", indexLabel: "Maps/ Search" },
-                        { y: 55, label: "55%", indexLabel: "Weather" },
-                        { y: 61, label: "61%", indexLabel: "Games" }
-                    ]
+                    dataPoints: dataPoints
                 }
                 ]
             });
@@ -218,20 +222,20 @@
         }
 
         function getCurrentDate() {
-    
+
             var today = new Date();
             var dd = today.getDate();
-            var mm = today.getMonth()+1; 
+            var mm = today.getMonth()+1;
 
             var yyyy = today.getFullYear();
             if(dd<10){
                 dd='0'+dd
-            } 
+            }
             if(mm<10){
                 mm='0'+mm
-            } 
+            }
             var today = yyyy+"-"+mm+"-"+dd;
-            
+
             return today;
         }
 
@@ -278,7 +282,7 @@
     <button onclick="hide()" id="hide_button" class="button">Hide</button>
 </div>
 
-<div id="stat_panel">
+<div id="stat_panel" class="z-depth-5">
     
     <div id="stat_title" ;><span>Statistics</span></div>
 
@@ -289,23 +293,23 @@
     </ul>
 
     <div id="regionStat" style="margin-top:10px">
-        <div id="regionChart" style="height: 300px; width: 280px; margin: 0 auto;">
+        <div id="regionChart" style="height: 500px; width: 320px; margin: 0 auto; overflow-y:scroll;">
         </div>
     </div>
     <div id="countryStat" style="margin-top:10px">
-        <div id="countryChart" style="height: 300px; width: 280px; margin: 0 auto;">
+        <div id="countryChart" style="height: 500px; width: 320px; margin: 0 auto; overflow-y:scroll;">
         </div>
     </div>
-    <div id="cityStat" style="margin-top:10px">
-        <div id="cityChart" style="height: 300px; width: 280px; margin: 0 auto;">
+    <div id="cityStat" style="margin-top:10px;">
+        <div id="cityChart" style="height: 500px; width: 320px; margin: 0 auto; overflow-y:scroll;">
     </div>
     </div>
 
     <button onclick="hideStat()" id="hideStat_button" class="button">Hide</button>
 </div>
 
-<a class="waves-effect waves-light btn showSearchPanelButton" onclick="show()" id="show_button">Search</a>
-<a class="waves-effect waves-light btn showStatPanelButton" onclick="showStat()" id="stat_button">Stat</a>
+<a class="waves-effect waves-light btn showSearchPanelButton z-depth-5" onclick="show()" id="show_button">Search</a>
+<a class="waves-effect waves-light btn showStatPanelButton z-depth-5" onclick="showStat()" id="stat_button">Stat</a>
 
 @*<button onclick="show()" id="show_button" class="button showSearchPanelButton">Search</button>*@
 
