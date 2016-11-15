@@ -100,3 +100,21 @@ textarea {
     display:inline-block;
 }
 
+#stat_panel {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 900px;
+    background: #edf7ee;
+    z-index: 50;
+    padding: 10px;
+    font-size: 13px;
+    display: none;
+}
+
+#hideStat_button {
+    position: absolute;
+    left:0;
+    top:50%;
+}

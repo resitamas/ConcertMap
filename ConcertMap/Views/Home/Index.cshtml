@@ -10,14 +10,29 @@
 
     
     <script>
+
+
         $(function () {
 
             $("#fromDate").attr("disabled","disabled");
             $("#toDate").attr("disabled","disabled");
 
+            @{
 
-            var markers = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(MapManager.GetMarkers(Model.events)))
-            var concertData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(MapManager.CreateCountryData(Model.events)));
+                //Source of map color
+                var concertData = MapManager.CreateCountryData(Model.events);
+
+                //Source of map markers
+                var markersData = MapManager.GetMarkers(Model.events);
+
+                //Stat
+                var stat = MapManager.CreateStat(concertData, Model.events);
+
+
+            } 
+
+            var markersDataSerialized = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(markersData))
+            var concertDataSerialized = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(concertData));
 
             var mapObj = new jvm.Map({
 
@@ -32,17 +47,16 @@
                     }
                 },
                 backgroundColor: '#A1ABB5',
-                markers: markers,
+                markers: markersDataSerialized,
                 series: {
                     regions: [{
-                        values: concertData,
+                        values: concertDataSerialized,
                         scale: ['#33F259', '#176326'],
                         normalizeFunction: 'polynomial',
                         attribute: 'fill'
                     }]
                 }
             });
-
         });
 
 
@@ -112,7 +126,89 @@
         }
 
         function showStat() {
+            $("#stat_panel").show("drop",{ direction: "right", complete: statPanelShowed }, "slow" );
+            $("#stat_button").hide();
+        }
+
+        function hideStat() {
+            $("#stat_button").show();
+            $("#stat_panel").hide("drop",{ direction: "right", complete: statPanelHided }, "slow" );
+        }
+
+        function statPanelShowed() {
     
+            //$("regionChart").css("display","block");
+
+            var regionChart = createChart("regionChart");
+
+            var countryChart = createChart("countryChart");
+            
+            var cityChart = createChart("cityChart");
+
+            regionChart.render();
+            countryChart.render();
+            cityChart.render();
+            
+        }
+
+        function createChart(containerName) {
+    
+            var chart = new CanvasJS.Chart(containerName, {
+                title: {
+                    text: "Region numbers",
+                    fontFamily: "Verdana",
+                    fontColor: "Peru",
+                    fontSize: 28
+
+                },
+                width: 200,
+                animationEnabled: true,
+                axisY: {
+                    tickThickness: 0,
+                    lineThickness: 0,
+                    valueFormatString: " ",
+                    gridThickness: 0                    
+                },
+                axisX: {
+                    tickThickness: 0,
+                    lineThickness: 0,
+                    labelFontSize: 18,
+                    labelFontColor: "Peru",
+                    interval:1
+                },
+                data: [
+                {
+                    indexLabelFontSize: 26,
+                    toolTipContent: "<span style='\"'color: {color};'\"'><strong>{indexLabel}</strong></span><span style='\"'font-size: 20px; color:peru '\"'><strong>{y}</strong></span>",
+
+                    indexLabelPlacement: "inside",
+                    indexLabelFontColor: "white",
+                    indexLabelFontWeight: 600,
+                    indexLabelFontFamily: "Verdana",
+                    color: "#62C9C3",
+                    type: "bar",
+                    dataPoints: [
+                        { y: 21, label: "21%", indexLabel: "Video" },
+                        { y: 25, label: "25%", indexLabel: "Dining" },
+                        { y: 33, label: "33%", indexLabel: "Entertainment" },
+                        { y: 36, label: "36%", indexLabel: "News" },
+                        { y: 42, label: "42%", indexLabel: "Music" },
+                        { y: 49, label: "49%", indexLabel: "Social Networking" },
+                        { y: 50, label: "50%", indexLabel: "Maps/ Search" },
+                        { y: 55, label: "55%", indexLabel: "Weather" },
+                        { y: 61, label: "61%", indexLabel: "Games" }
+                    ]
+                }
+                ]
+            });
+
+            return chart;
+        }
+
+        function statPanelHided() {
+
+            //$("regionChart").css("display","none");
+
         }
 
         function getCurrentDate() {
@@ -161,6 +257,21 @@
 
     <button onclick="hide()" id="hide_button" class="button">Hide</button>
 </div>
+
+<div id="stat_panel">
+    
+    <div id="stat_title">Statistics</div>
+
+    <div id="regionChart" style="height: 300px; width: 280px; float:left; margin: 10px">
+    </div>
+    <div id="countryChart" style="height: 300px; width: 280px; float:left; margin: 10px">
+    </div>
+    <div id="cityChart" style="height: 300px; width: 280px; float:left; margin: 10px">
+    </div>
+
+    <button onclick="hideStat()" id="hideStat_button" class="button">Hide</button>
+</div>
+
 <button onclick="show()" id="show_button" class="button showSearchPanelButton">Search</button>
 
 <button onclick="showStat()" id="stat_button" class="button showStatPanelButton">Stat</button>

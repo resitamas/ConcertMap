@@ -40,6 +40,9 @@ namespace ConcertMap
             bundles.Add(new StyleBundle("~/Content/jqueryui").IncludeDirectory(
                       "~/Content/themes","*.css",true));
 
+            bundles.Add(new ScriptBundle("~/bundles/canvasjs").Include(
+                      "~/Scripts/CanvasJS/canvasjs.min.js"));
+
         }
     }
 }
