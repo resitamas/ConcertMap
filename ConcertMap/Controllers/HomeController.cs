@@ -20,7 +20,7 @@ namespace ConcertMap.Controllers
             service = new ConcertService.Rest.RestHelper();
         }
         
-        public ActionResult Index(string artist = null, DateTime? fromDate = null, DateTime? toDate = null, bool isPast = true, bool isUpcoming = true)
+        public ActionResult Index(string artist = null, DateTime? fromDate = null, DateTime? toDate = null, bool isPast = true, bool isUpcoming = true, bool dates = false)
         {
             Events model = new Events();
 
@@ -97,7 +97,7 @@ namespace ConcertMap.Controllers
         [HttpGet]
         public ActionResult Search(Events m)
         {
-            return RedirectToAction("Index", "Home", new { artist = m.ArtistName, fromDate = m.fromDate, toDate = m.toDate, isPast = m.isPast, isUpcoming = m.isUpcoming });
+            return RedirectToAction("Index", "Home", new { artist = m.ArtistName, fromDate = m.fromDate, toDate = m.toDate, isPast = m.isPast, isUpcoming = m.isUpcoming, dates = m.dates });
         }
     }
     
