@@ -20,7 +20,7 @@ namespace ConcertMap.Controllers
             service = new ConcertService.Rest.RestHelper();
         }
         
-        public ActionResult Index(string artist = null, DateTime? fromDate = null, DateTime? toDate = null, bool isPast = true, bool isUpcoming = true, bool dates = false)
+        public ActionResult Index(string artist = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
             Events model = new Events();
 
@@ -34,27 +34,7 @@ namespace ConcertMap.Controllers
                 return View(model);
             }
 
-            if (isPast && !isUpcoming)
-            {
-                model.toDate = DateTime.Now;
-            }
-            else
-            {
-                if (!isPast && isUpcoming)
-                {
-                    model.fromDate = DateTime.Now;
-                }
-                else
-                {
-                    if (isPast && isUpcoming)
-                    {
-                        model.fromDate = Convert.ToDateTime("1900-01-01 00:00:01");
-                        model.toDate = Convert.ToDateTime("2100-01-01 00:00:01");
-                    }
-                }
-            }
-
-            List<Event> eventList = new List<Event>(); ;
+           List<Event> eventList = new List<Event>(); ;
 
             try
             {
@@ -73,8 +53,9 @@ namespace ConcertMap.Controllers
             model.ArtistName = artist;
             model.fromDate = fromDate;
             model.toDate = toDate;
-            model.isPast = isPast;
-            model.isUpcoming = isUpcoming;
+            model.isUpcoming = true;
+            model.isPast = true;
+            //model.dates = true;
 
             return View(model);
         }
@@ -97,7 +78,7 @@ namespace ConcertMap.Controllers
         [HttpGet]
         public ActionResult Search(Events m)
         {
-            return RedirectToAction("Index", "Home", new { artist = m.ArtistName, fromDate = m.fromDate, toDate = m.toDate, isPast = m.isPast, isUpcoming = m.isUpcoming, dates = m.dates });
+            return RedirectToAction("Index", "Home", new { artist = m.ArtistName, fromDate = m.fromDate, toDate = m.toDate });
         }
     }
     
