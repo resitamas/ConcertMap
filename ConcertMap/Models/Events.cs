@@ -16,12 +16,12 @@ namespace ConcertMap.Models
         [DisplayName("From")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? fromDate { get; set; }
+        public DateTime fromDate { get; set; }
 
         [DisplayName("To")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? toDate { get; set; }
+        public DateTime toDate { get; set; }
 
         [DisplayName("All upcoming")]
         public bool isUpcoming { get; set; }

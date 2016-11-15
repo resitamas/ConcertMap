@@ -20,7 +20,7 @@ namespace ConcertMap.Controllers
             service = new ConcertService.Rest.RestHelper();
         }
         
-        public ActionResult Index(string artist = null, DateTime? fromDate = null, DateTime? toDate = null)
+        public ActionResult Index(string artist = null, DateTime? fromDate = null, DateTime? toDate = null, bool upcoming = true, bool past = true)
         {
             Events model = new Events();
 
@@ -43,6 +43,8 @@ namespace ConcertMap.Controllers
                     eventList = service.GetEvents(artist, fromDate, toDate);
                 }
 
+                   eventList = service.GetEvents(artist, fromDate, toDate);
+
             }
             catch (ConcertException ex)
             {
@@ -56,11 +58,8 @@ namespace ConcertMap.Controllers
 
             model.events = eventList;
             model.ArtistName = artist;
-            model.fromDate = fromDate;
-            model.toDate = toDate;
-            model.isUpcoming = true;
-            model.isPast = true;
-            //model.dates = true;
+            model.isUpcoming = upcoming;
+            model.isPast = past;
 
             return View(model);
         }
@@ -83,7 +82,7 @@ namespace ConcertMap.Controllers
         [HttpGet]
         public ActionResult Search(Events m)
         {
-            return RedirectToAction("Index", "Home", new { artist = m.ArtistName, fromDate = m.fromDate, toDate = m.toDate });
+            return RedirectToAction("Index", "Home", new { artist = m.ArtistName, fromDate = m.fromDate.ToString("yyyy-MM-dd"), toDate = m.toDate.ToString("yyyy-MM-dd"), upcoming = m.isUpcoming, past = m.isPast });
         }
     }
     

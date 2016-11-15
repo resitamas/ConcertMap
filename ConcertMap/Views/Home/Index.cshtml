@@ -8,7 +8,7 @@
 
 @section Scripts {
 
-
+    
     <script>
 
 
@@ -29,7 +29,7 @@
                 var stat = MapManager.CreateStat(concertData, Model.events);
 
 
-            }
+            } 
 
             var markersDataSerialized = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(markersData))
             var concertDataSerialized = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(concertData));
@@ -60,7 +60,7 @@
 
             $('input[type=hidden]').each(function (index, element) {
                 $(element).appendTo($(element).parent());
-            });
+        });
 
         });
 
@@ -87,18 +87,18 @@
                 if (!isCheckedPast)
                     $("#fromDate").val(getCurrentDate());
                 $("#toDate").val("2100-01-01");
-
+                
             } else
             {
                 if (isCheckedPast) $("#fromDate").val("1900-01-01");
                 $("#toDate").val(getCurrentDate());
-
+               
             }
 
         }
 
         function pastChanged(cb) {
-
+            
             var isChecked = $(cb).prop("checked");
             var isCheckedUpcoming = $("#upcoming").prop("checked");
 
@@ -106,11 +106,11 @@
                 if (!isCheckedUpcoming)
                     $("#toDate").val(getCurrentDate());
                 $("#fromDate").val("1900-01-01");
-
+                
             } else {
                 if (isCheckedUpcoming) $("#toDate").val("2100-01-01");
                 $("#fromDate").val(getCurrentDate());
-
+                
             }
         }
 
@@ -120,8 +120,8 @@
             if (isChecked) {
                 $("#isUpcoming").attr("disabled","disabled");
                 $("#isPast").attr("disabled","disabled");
-                $("#toDate").attr('readonly',false);
-                $("#fromDate").attr('readonly',false);
+               $("#toDate").attr('readonly',false);
+               $("#fromDate").attr('readonly',false);
             } else {
                 $("#isUpcoming").removeAttr("disabled");
                 $("#isPast").removeAttr("disabled");
@@ -141,23 +141,23 @@
         }
 
         function statPanelShowed() {
-
+    
             //$("regionChart").css("display","block");
 
             var regionChart = createChart("regionChart","Region stat");
 
             var countryChart = createChart("countryChart","Country Stat");
-
+            
             var cityChart = createChart("cityChart","City Stat");
 
             regionChart.render();
             countryChart.render();
             cityChart.render();
-
+            
         }
 
         function createChart(containerName, titleText) {
-
+    
             var chart = new CanvasJS.Chart(containerName, {
                 title: {
                     text: titleText,
@@ -173,7 +173,7 @@
                     tickThickness: 0,
                     lineThickness: 0,
                     valueFormatString: " ",
-                    gridThickness: 0
+                    gridThickness: 0                    
                 },
                 axisX: {
                     tickThickness: 0,
@@ -218,20 +218,20 @@
         }
 
         function getCurrentDate() {
-
+    
             var today = new Date();
             var dd = today.getDate();
-            var mm = today.getMonth()+1;
+            var mm = today.getMonth()+1; 
 
             var yyyy = today.getFullYear();
             if(dd<10){
                 dd='0'+dd
-            }
+            } 
             if(mm<10){
                 mm='0'+mm
-            }
+            } 
             var today = yyyy+"-"+mm+"-"+dd;
-
+            
             return today;
         }
 
@@ -240,8 +240,10 @@
 
 <div id="world-map" style="height: 100%"></div>
 
+
 <div id="search_panel">
     <div id="title">Search</div>
+  
 
     <div id="search_form">
         @using (Html.BeginForm("Search", "Home", FormMethod.Get))
@@ -267,17 +269,17 @@
                 @Html.LabelFor(m => m.toDate)
                 @Html.EditorFor(model => model.toDate, new { @type = "date", id = "toDate" })
                 <br />
-
+               
                 <input class="btn" type="submit" value="Search" id="search_button" />
             </p>
-        }
+        } 
     </div>
 
     <button onclick="hide()" id="hide_button" class="button">Hide</button>
 </div>
 
 <div id="stat_panel">
-
+    
     <div id="stat_title" ;><span>Statistics</span></div>
 
     <ul class="tabs tabs-fixed-width">
@@ -296,7 +298,7 @@
     </div>
     <div id="cityStat" style="margin-top:10px">
         <div id="cityChart" style="height: 300px; width: 280px; margin: 0 auto;">
-        </div>
+    </div>
     </div>
 
     <button onclick="hideStat()" id="hideStat_button" class="button">Hide</button>
