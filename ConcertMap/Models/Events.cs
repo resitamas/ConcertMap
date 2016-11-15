@@ -25,5 +25,7 @@ namespace ConcertMap.Models
 
         public List<Event> events { get; set; }
 
+        public bool dates { get; set; }
+
     }
 }

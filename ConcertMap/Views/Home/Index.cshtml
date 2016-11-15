@@ -76,13 +76,18 @@
         function upcomingChanged(cb) {
 
             var isChecked = $(cb).prop("checked");
+            var isCheckedPast = $("#past").prop("checked");
 
             if (isChecked) {
-                $("#fromDate").val(getCurrentDate());
-                $("#fromDate").attr("disabled","disabled");
+                if (!isCheckedPast)
+                    $("#fromDate").val(getCurrentDate());
+                $("#toDate").val("2100-01-01");
+                
             } else
             {
-                $("#fromDate").removeAttr("disabled");
+                if (isCheckedPast) $("#fromDate").val("1900-01-01");
+                $("#toDate").val(getCurrentDate());
+               
             }
 
         }
@@ -90,12 +95,33 @@
         function pastChanged(cb) {
             
             var isChecked = $(cb).prop("checked");
+            var isCheckedUpcoming = $("#upcoming").prop("checked");
 
             if (isChecked) {
-                $("#toDate").val(getCurrentDate());
-                $("#toDate").attr("disabled","disabled");
+                if (!isCheckedUpcoming)
+                    $("#toDate").val(getCurrentDate());
+                $("#fromDate").val("1900-01-01");
+                
             } else {
-                $("#toDate").removeAttr("disabled");
+                if (isCheckedUpcoming) $("#toDate").val("2100-01-01");
+                $("#fromDate").val(getCurrentDate());
+                
+            }
+        }
+
+        function datesChanged(cb) {
+            var isChecked = $(cb).prop("checked");
+
+            if (isChecked) {
+               $("#upcoming").attr("disabled","disabled");
+               $("#past").attr("disabled","disabled");
+               $("#toDate").removeAttr("disabled");
+               $("#fromDate").removeAttr("disabled");
+            } else {
+                $("#upcoming").removeAttr("disabled");
+                $("#past").removeAttr("disabled");
+                $("#fromDate").attr("disabled","disabled");
+                $("#toDate").attr("disabled","disabled");
             }
         }
 
@@ -215,11 +241,15 @@
         @using (Html.BeginForm("Search", "Home", FormMethod.Get))
         {
             <p>
-                Artist: @Html.TextBoxFor(model => model.ArtistName) <button class="button">+</button><br />
+                Artist: @Html.TextBoxFor(model => model.ArtistName) <br />
+
+                All upcoming: @Html.CheckBoxFor(model => model.isUpcoming, new { @checked = "checked", id = "upcoming", onclick = "upcomingChanged(this)" }) <br />
+                All past: @Html.CheckBoxFor(model => model.isPast, new { @checked = "checked", id = "past", onclick = "pastChanged(this)" }) <br />
+
+                Choose dates: @Html.CheckBoxFor(model => model.dates, new { id = "dates", onclick = "datesChanged(this)" })<br />
                 From: @Html.EditorFor(model => model.fromDate, new { @type = "date", id="fromDate"}) <br />
                 To: @Html.EditorFor(model => model.toDate, new { @type = "date", id = "toDate"}) <br />
-                Upcoming: @Html.CheckBoxFor(model => model.isUpcoming, new { @checked = "checked", id = "upcoming", onclick="upcomingChanged(this)" }) <br />
-                Past: @Html.CheckBoxFor(model => model.isPast, new { @checked = "checked", id = "past", onclick = "pastChanged(this)" }) <br />
+               
                 <input class="button" type="submit" value="Search" id="search_button"/>
             </p>
         } 
