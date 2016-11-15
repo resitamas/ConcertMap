@@ -31,10 +31,40 @@ textarea {
     max-width: 280px;
 }
 
+#artist,
+#toDate:read-write,
+#fromDate:read-write {
+    background-color: #f9fffa;
+}
+
+#fromDate:read-only,
+#toDate:read-only { 
+    background-color: lightgrey;
+}
+
+#past,
+#upcoming,
+#dates {
+   display: inline-block;
+   float: right;
+   margin-right: 90px;
+}
+
+#fromDate,
+#toDate {
+   display: inline-block;
+   float: right;
+   margin-right: 50px;
+}
+
+label{  
+    display:inline-block;    
+    vertical-align:middle; 
+}
 
 #hide_button {
     position: absolute;
-    right:0;
+    right:-25px;
     top:50%;
 }
 
@@ -51,17 +81,19 @@ textarea {
     left: 0;
     top: 0;
     height: 100%;
-    width: 230px;
+    width: 250px;
     background: #edf7ee;
     z-index: 50;
     padding: 10px;
     font-size: 13px;
     display: none;
+    opacity: 0.93;
 }
 
 #search_button {
     position: absolute;
     right:50%;
+    margin-top: 40px;
 }
 
 .button {
@@ -119,6 +151,12 @@ textarea {
     top:50%;
 }
 
-input:read-only { 
-    background-color: lightgrey;
+
+
+.form_div {
+    margin-bottom: 20px;
+    margin-top: 10px;
+
 }
+
+

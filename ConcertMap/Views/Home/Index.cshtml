@@ -234,44 +234,52 @@
 
 <div id="world-map" style="height: 100%"></div>
 
-<div id="search_panel">
-    <div id="title">Search</div>
-  
-    <div id="search_form">
-        @using (Html.BeginForm("Search", "Home", FormMethod.Get))
-        {
-            <p>
-                Artist: @Html.TextBoxFor(model => model.ArtistName) <br />
 
-                All upcoming: @Html.CheckBoxFor(model => model.isUpcoming, new { @checked = "checked", id = "upcoming", onclick = "upcomingChanged(this)" }) <br />
-                All past: @Html.CheckBoxFor(model => model.isPast, new { @checked = "checked", id = "past", onclick = "pastChanged(this)" }) <br />
+    <div id="search_panel">
+        <div id="title">Search</div>
 
-                Choose dates: @Html.CheckBoxFor(model => model.dates, new { id = "dates", onclick = "datesChanged(this)" })<br />
-                From: @Html.EditorFor(model => model.fromDate, new { @type = "date", id="fromDate"}) <br />
-                To: @Html.EditorFor(model => model.toDate, new { @type = "date", id = "toDate"}) <br />
-               
-                <input class="button" type="submit" value="Search" id="search_button"/>
-            </p>
-        } 
+
+        <div id="search_form">
+            @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+            {
+                <p>
+                    <label>Artist:</label> @Html.TextBoxFor(model => model.ArtistName, new { id = "artist" }) <br />
+
+                    <div class="form_div">
+                        <label>All upcoming:</label> @Html.CheckBoxFor(model => model.isUpcoming, new { @checked = "checked", id = "upcoming", onclick = "upcomingChanged(this)" }) <br />
+                        <label>All past:</label> @Html.CheckBoxFor(model => model.isPast, new { @checked = "checked", id = "past", onclick = "pastChanged(this)" }) <br />
+                    </div>
+
+
+                    <label>Choose dates:</label> @Html.CheckBoxFor(model => model.dates, new { id = "dates", onclick = "datesChanged(this)" })<br />
+                    <div class="form_div">
+                        <label>From:</label> @Html.EditorFor(model => model.fromDate, new { @type = "date", id = "fromDate" })
+                        <label>To:</label> @Html.EditorFor(model => model.toDate, new { @type = "date", id = "toDate" })
+                    </div>
+
+
+                    <input class="button" type="submit" value="Search" id="search_button" />
+                </p>
+            }
+        </div>
+
+        <button onclick="hide()" id="hide_button" class="button">Hide</button>
     </div>
 
-    <button onclick="hide()" id="hide_button" class="button">Hide</button>
-</div>
+    <div id="stat_panel">
 
-<div id="stat_panel">
-    
-    <div id="stat_title">Statistics</div>
+        <div id="stat_title">Statistics</div>
 
-    <div id="regionChart" style="height: 300px; width: 280px; float:left; margin: 10px">
+        <div id="regionChart" style="height: 300px; width: 280px; float:left; margin: 10px">
+        </div>
+        <div id="countryChart" style="height: 300px; width: 280px; float:left; margin: 10px">
+        </div>
+        <div id="cityChart" style="height: 300px; width: 280px; float:left; margin: 10px">
+        </div>
+
+        <button onclick="hideStat()" id="hideStat_button" class="button">Hide</button>
     </div>
-    <div id="countryChart" style="height: 300px; width: 280px; float:left; margin: 10px">
-    </div>
-    <div id="cityChart" style="height: 300px; width: 280px; float:left; margin: 10px">
-    </div>
 
-    <button onclick="hideStat()" id="hideStat_button" class="button">Hide</button>
-</div>
+    <button onclick="show()" id="show_button" class="button showSearchPanelButton">Search</button>
 
-<button onclick="show()" id="show_button" class="button showSearchPanelButton">Search</button>
-
-<button onclick="showStat()" id="stat_button" class="button showStatPanelButton">Stat</button>
+    <button onclick="showStat()" id="stat_button" class="button showStatPanelButton">Stat</button>
