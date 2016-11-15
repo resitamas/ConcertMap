@@ -118,3 +118,7 @@ textarea {
     left:0;
     top:50%;
 }
+
+input:read-only { 
+    background-color: lightgrey;
+}

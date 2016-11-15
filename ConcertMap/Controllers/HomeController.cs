@@ -38,11 +38,14 @@ namespace ConcertMap.Controllers
 
             try
             {
-                 eventList = service.GetEvents(artist, model.fromDate, model.toDate);
+                 if (fromDate!= null && toDate!= null ) eventList = service.GetEvents(artist, model.fromDate, model.toDate);
+                 //else eventList = service.GetEvents(artist);
+
             }
             catch (ConcertException ex)
             {
                 //Nincs ilyen előadó
+              
             }
             catch (Exception)
             {

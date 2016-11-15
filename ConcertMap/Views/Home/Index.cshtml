@@ -14,8 +14,8 @@
 
         $(function () {
 
-            $("#fromDate").attr("disabled","disabled");
-            $("#toDate").attr("disabled","disabled");
+            $("#fromDate").attr('readonly',true);
+            $("#toDate").attr('readonly',true);
 
             @{
 
@@ -115,13 +115,13 @@
             if (isChecked) {
                $("#upcoming").attr("disabled","disabled");
                $("#past").attr("disabled","disabled");
-               $("#toDate").removeAttr("disabled");
-               $("#fromDate").removeAttr("disabled");
+               $("#toDate").attr('readonly',false);
+               $("#fromDate").attr('readonly',false);
             } else {
                 $("#upcoming").removeAttr("disabled");
                 $("#past").removeAttr("disabled");
-                $("#fromDate").attr("disabled","disabled");
-                $("#toDate").attr("disabled","disabled");
+                $("#fromDate").attr('readonly',true);
+                $("#toDate").attr('readonly',true);
             }
         }
 
