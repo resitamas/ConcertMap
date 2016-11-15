@@ -29,7 +29,7 @@ namespace ConcertService.Rest
 
             if (fromDate.HasValue && toDate.HasValue)
             {
-                dict.Add("date", fromDate.Value.ToString("yyyy-mm-dd") + "," + toDate.Value.ToString("yyyy-mm-dd"));
+                dict.Add("date", fromDate.Value.ToString("yyyy-MM-dd") + "," + toDate.Value.ToString("yyyy-MM-dd"));
             }
 
             return dict;

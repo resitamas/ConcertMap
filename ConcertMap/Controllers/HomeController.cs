@@ -34,8 +34,25 @@ namespace ConcertMap.Controllers
                 return View(model);
             }
 
-            if (isPast && !isUpcoming) model.toDate = DateTime.Now;
-            if (!isPast && isUpcoming) model.fromDate = DateTime.Now;
+            if (isPast && !isUpcoming)
+            {
+                model.toDate = DateTime.Now;
+            }
+            else
+            {
+                if (!isPast && isUpcoming)
+                {
+                    model.fromDate = DateTime.Now;
+                }
+                else
+                {
+                    if (isPast && isUpcoming)
+                    {
+                        model.fromDate = Convert.ToDateTime("1900-01-01 00:00:01");
+                        model.toDate = Convert.ToDateTime("2100-01-01 00:00:01");
+                    }
+                }
+            }
 
             List<Event> eventList = new List<Event>(); ;
 
