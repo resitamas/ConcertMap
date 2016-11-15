@@ -56,5 +56,67 @@ namespace ConcertMap.App_Code.Helper
         }
 
 
+        public static Stat CreateStat(Dictionary<string, double> iso3Dict, List<Event> events)
+        {
+
+            Stat stat = new Stat()
+            {
+                CityStat = new Dictionary<string, int>(),
+                CountryStat = new Dictionary<string, int>(),
+                RegionStat = new Dictionary<string, int>()
+            };
+
+            Dictionary<string, double> countrystat = new Dictionary<string, double>();
+
+            var countries = CountryManager.GetCountries().ToList();
+
+            if (iso3Dict != null)
+            {
+                foreach (var d in iso3Dict)
+                {
+                    var value = Convert.ToInt32(d.Value);
+
+                    //Create country stat
+                    stat.CountryStat.Add(countries.Where(c => c.ISO3 == d.Key).First().CommonName, value);
+
+                    //Create region stat
+                    var region = countries.Where(c => c.ISO3 == d.Key).First().Region;
+
+                    if (stat.RegionStat.ContainsKey(region))
+                    {
+                        stat.RegionStat[region] += value;
+                    }
+                    else
+                    {
+                        stat.RegionStat.Add(region, value);
+                    }
+
+                }
+
+            }
+
+            if (events != null)
+            {
+                if (events != null)
+                {
+                    foreach (var e in events)
+                    {
+                        var city = e.Venue.City;
+
+                        if (stat.CityStat.ContainsKey(city))
+                        {
+                            stat.RegionStat[city] ++;
+                        }
+                        else
+                        {
+                            stat.RegionStat.Add(city, 1);
+                        }
+                    }
+                }
+            }
+
+
+            return stat;
+        }
     }
 }

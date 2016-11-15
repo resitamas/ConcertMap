@@ -10,19 +10,9 @@ namespace CountriesService
     public class CountryManager
     {
 
-        public CountryManager()
-        {
-
-            var countries = Country.All.ToList();
-
-            var k = 0;
-
-        }
-
         public static IEnumerable<ReducedCountry> GetCountries()
         {
             List<ReducedCountry> countries = new List<ReducedCountry>();
-            var uk = Country.UnitedKingdom;
 
             foreach (var country in Country.All.ToList())
             {
