@@ -38,8 +38,10 @@ namespace ConcertMap.Controllers
 
             try
             {
-                 if (fromDate!= null && toDate!= null ) eventList = service.GetEvents(artist, model.fromDate, model.toDate);
-                 //else eventList = service.GetEvents(artist);
+                if (fromDate != null && toDate != null)
+                {
+                    eventList = service.GetEvents(artist, fromDate, toDate);
+                }
 
             }
             catch (ConcertException ex)

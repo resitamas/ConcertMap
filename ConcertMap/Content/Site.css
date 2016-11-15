@@ -105,12 +105,13 @@ textarea {
     right: 0;
     top: 0;
     height: 100%;
-    width: 900px;
+    width: 500px;
     background: #edf7ee;
     z-index: 50;
     padding: 10px;
     font-size: 13px;
     display: none;
+    text-align: center;
 }
 
 #hideStat_button {
@@ -121,4 +122,9 @@ textarea {
 
 input:read-only { 
     background-color: lightgrey;
+}
+
+#stat_title {
+    font-size: 20px;
+    padding: 20px;
 }

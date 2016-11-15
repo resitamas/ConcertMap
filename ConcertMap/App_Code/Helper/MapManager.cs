@@ -105,11 +105,11 @@ namespace ConcertMap.App_Code.Helper
 
                         if (stat.CityStat.ContainsKey(city))
                         {
-                            stat.RegionStat[city] ++;
+                            stat.CityStat[city] ++;
                         }
                         else
                         {
-                            stat.RegionStat.Add(city, 1);
+                            stat.CityStat.Add(city, 1);
                         }
                     }
                 }

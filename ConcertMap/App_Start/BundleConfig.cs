@@ -43,6 +43,12 @@ namespace ConcertMap
             bundles.Add(new ScriptBundle("~/bundles/canvasjs").Include(
                       "~/Scripts/CanvasJS/canvasjs.min.js"));
 
+            bundles.Add(new StyleBundle("~/Content/materialize").Include(
+                      "~/Content/materialize.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
+                      "~/Scripts/materialize.js"));
+
         }
     }
 }

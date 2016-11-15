@@ -8,7 +8,7 @@
 
 @section Scripts {
 
-    
+
     <script>
 
 
@@ -29,7 +29,7 @@
                 var stat = MapManager.CreateStat(concertData, Model.events);
 
 
-            } 
+            }
 
             var markersDataSerialized = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(markersData))
             var concertDataSerialized = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(concertData));
@@ -57,6 +57,11 @@
                     }]
                 }
             });
+
+            $('input[type=hidden]').each(function (index, element) {
+                $(element).appendTo($(element).parent());
+            });
+
         });
 
 
@@ -82,18 +87,18 @@
                 if (!isCheckedPast)
                     $("#fromDate").val(getCurrentDate());
                 $("#toDate").val("2100-01-01");
-                
+
             } else
             {
                 if (isCheckedPast) $("#fromDate").val("1900-01-01");
                 $("#toDate").val(getCurrentDate());
-               
+
             }
 
         }
 
         function pastChanged(cb) {
-            
+
             var isChecked = $(cb).prop("checked");
             var isCheckedUpcoming = $("#upcoming").prop("checked");
 
@@ -101,11 +106,11 @@
                 if (!isCheckedUpcoming)
                     $("#toDate").val(getCurrentDate());
                 $("#fromDate").val("1900-01-01");
-                
+
             } else {
                 if (isCheckedUpcoming) $("#toDate").val("2100-01-01");
                 $("#fromDate").val(getCurrentDate());
-                
+
             }
         }
 
@@ -113,13 +118,13 @@
             var isChecked = $(cb).prop("checked");
 
             if (isChecked) {
-               $("#upcoming").attr("disabled","disabled");
-               $("#past").attr("disabled","disabled");
-               $("#toDate").attr('readonly',false);
-               $("#fromDate").attr('readonly',false);
+                $("#isUpcoming").attr("disabled","disabled");
+                $("#isPast").attr("disabled","disabled");
+                $("#toDate").attr('readonly',false);
+                $("#fromDate").attr('readonly',false);
             } else {
-                $("#upcoming").removeAttr("disabled");
-                $("#past").removeAttr("disabled");
+                $("#isUpcoming").removeAttr("disabled");
+                $("#isPast").removeAttr("disabled");
                 $("#fromDate").attr('readonly',true);
                 $("#toDate").attr('readonly',true);
             }
@@ -136,38 +141,39 @@
         }
 
         function statPanelShowed() {
-    
+
             //$("regionChart").css("display","block");
 
-            var regionChart = createChart("regionChart");
+            var regionChart = createChart("regionChart","Region stat");
 
-            var countryChart = createChart("countryChart");
-            
-            var cityChart = createChart("cityChart");
+            var countryChart = createChart("countryChart","Country Stat");
+
+            var cityChart = createChart("cityChart","City Stat");
 
             regionChart.render();
             countryChart.render();
             cityChart.render();
-            
+
         }
 
-        function createChart(containerName) {
-    
+        function createChart(containerName, titleText) {
+
             var chart = new CanvasJS.Chart(containerName, {
                 title: {
-                    text: "Region numbers",
+                    text: titleText,
                     fontFamily: "Verdana",
                     fontColor: "Peru",
                     fontSize: 28
 
                 },
-                width: 200,
+                width: 300,
                 animationEnabled: true,
+                backgroundColor: '#edf7ee',
                 axisY: {
                     tickThickness: 0,
                     lineThickness: 0,
                     valueFormatString: " ",
-                    gridThickness: 0                    
+                    gridThickness: 0
                 },
                 axisX: {
                     tickThickness: 0,
@@ -212,20 +218,20 @@
         }
 
         function getCurrentDate() {
-    
+
             var today = new Date();
             var dd = today.getDate();
-            var mm = today.getMonth()+1; 
+            var mm = today.getMonth()+1;
 
             var yyyy = today.getFullYear();
             if(dd<10){
                 dd='0'+dd
-            } 
+            }
             if(mm<10){
                 mm='0'+mm
-            } 
+            }
             var today = yyyy+"-"+mm+"-"+dd;
-            
+
             return today;
         }
 
@@ -236,42 +242,70 @@
 
 <div id="search_panel">
     <div id="title">Search</div>
-  
+
     <div id="search_form">
         @using (Html.BeginForm("Search", "Home", FormMethod.Get))
         {
             <p>
-                Artist: @Html.TextBoxFor(model => model.ArtistName) <br />
+                <div class="input-field">
+                    @Html.LabelFor(m => m.ArtistName)
+                    @Html.TextBoxFor(model => model.ArtistName) <br />
+                </div>
 
-                All upcoming: @Html.CheckBoxFor(model => model.isUpcoming, new { @checked = "checked", id = "upcoming", onclick = "upcomingChanged(this)" }) <br />
-                All past: @Html.CheckBoxFor(model => model.isPast, new { @checked = "checked", id = "past", onclick = "pastChanged(this)" }) <br />
+                @Html.CheckBoxFor(m => m.isUpcoming, new { @checked = "checked", id = "isUpcoming", onclick = "upcomingChanged(this)" })
+                @Html.LabelFor(m => m.isUpcoming)
+                <br />
+                @Html.CheckBoxFor(model => model.isPast, new { @checked = "checked", id = "isPast", onclick = "pastChanged(this)" })
+                @Html.LabelFor(m => m.isPast)
+                <br />
+                @Html.CheckBoxFor(model => model.dates, new { id = "dates", onclick = "datesChanged(this)" })
+                @Html.LabelFor(m => m.dates)
+                <br />
+                @Html.LabelFor(m => m.fromDate)
+                @Html.EditorFor(model => model.fromDate, new { @type = "date", id = "fromDate" })
+                <br />
+                @Html.LabelFor(m => m.toDate)
+                @Html.EditorFor(model => model.toDate, new { @type = "date", id = "toDate" })
+                <br />
 
-                Choose dates: @Html.CheckBoxFor(model => model.dates, new { id = "dates", onclick = "datesChanged(this)" })<br />
-                From: @Html.EditorFor(model => model.fromDate, new { @type = "date", id="fromDate"}) <br />
-                To: @Html.EditorFor(model => model.toDate, new { @type = "date", id = "toDate"}) <br />
-               
-                <input class="button" type="submit" value="Search" id="search_button"/>
+                <input class="btn" type="submit" value="Search" id="search_button" />
             </p>
-        } 
+        }
     </div>
 
     <button onclick="hide()" id="hide_button" class="button">Hide</button>
 </div>
 
 <div id="stat_panel">
-    
-    <div id="stat_title">Statistics</div>
 
-    <div id="regionChart" style="height: 300px; width: 280px; float:left; margin: 10px">
+    <div id="stat_title" ;><span>Statistics</span></div>
+
+    <ul class="tabs tabs-fixed-width">
+        <li class="tab"><a href="#regionStat">Region stat</a></li>
+        <li class="tab"><a href="#countryStat">Country stat</a></li>
+        <li class="tab"><a href="#cityStat">City Stat</a></li>
+    </ul>
+
+    <div id="regionStat" style="margin-top:10px">
+        <div id="regionChart" style="height: 300px; width: 280px; margin: 0 auto;">
+        </div>
     </div>
-    <div id="countryChart" style="height: 300px; width: 280px; float:left; margin: 10px">
+    <div id="countryStat" style="margin-top:10px">
+        <div id="countryChart" style="height: 300px; width: 280px; margin: 0 auto;">
+        </div>
     </div>
-    <div id="cityChart" style="height: 300px; width: 280px; float:left; margin: 10px">
+    <div id="cityStat" style="margin-top:10px">
+        <div id="cityChart" style="height: 300px; width: 280px; margin: 0 auto;">
+        </div>
     </div>
 
     <button onclick="hideStat()" id="hideStat_button" class="button">Hide</button>
 </div>
 
-<button onclick="show()" id="show_button" class="button showSearchPanelButton">Search</button>
+<a class="waves-effect waves-light btn showSearchPanelButton" onclick="show()" id="show_button">Search</a>
+<a class="waves-effect waves-light btn showStatPanelButton" onclick="showStat()" id="stat_button">Stat</a>
 
-<button onclick="showStat()" id="stat_button" class="button showStatPanelButton">Stat</button>
+@*<button onclick="show()" id="show_button" class="button showSearchPanelButton">Search</button>*@
+
+@*<button onclick="showStat()" id="stat_button" class="button showStatPanelButton">Stat</button>*@
+
