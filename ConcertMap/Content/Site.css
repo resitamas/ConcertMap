@@ -53,12 +53,12 @@ textarea {
     top: 0;
     height: 100%;
     width: 250px;
-    background: #edf7ee;
+    background: #e0f7fa;
     z-index: 50;
     padding: 10px;
     font-size: 13px;
     display: none;
-    opacity: 0.93;
+    opacity: 0.94;
 }
 
 #search_button {
@@ -68,7 +68,7 @@ textarea {
 }
 
 .button {
-    background-color: #4CAF50; /* Green */
+    background-color: #00acc1; /* Green */
     border: none;
     color: white;
     padding: 5px 10px;
@@ -131,3 +131,4 @@ input:read-only {
     font-size: 20px;
     padding: 20px;
 }
+
