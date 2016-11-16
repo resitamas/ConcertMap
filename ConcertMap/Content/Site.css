@@ -35,8 +35,14 @@ textarea {
 
 #hide_button {
     position: absolute;
-    right:0;
     top:50%;
+    right:0;   
+}
+
+#search_button {
+    position: absolute;
+    right:50%;
+    margin-top: 40px;
 }
 
 
@@ -61,11 +67,6 @@ textarea {
     opacity: 0.94;
 }
 
-#search_button {
-    position: absolute;
-    right:50%;
-    margin-top: 40px;
-}
 
 .button {
     background-color: #00acc1; /* Green */
@@ -141,4 +142,8 @@ input:read-only {
     width: 320px;
     margin: 0 auto;
     overflow-y:scroll;
+}
+
+#world-map {
+    height: 100%;
 }

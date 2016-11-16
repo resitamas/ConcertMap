@@ -73,10 +73,27 @@
 
         });
 
+        $(document).click(function (event) {
+            if (!$(event.target).closest('#search_panel').length) {
+                if ($('#search_panel').is(":visible")) {
+                    $("#show_button").show();
+                    $("#search_panel").hide();
+                }
+            }
+            if (!$(event.target).closest('#stat_panel').length) {
+                if ($('#stat_panel').is(":visible")) {
+                    $("#stat_button").show();
+                    $("#stat_panel").hide();
+                }
+            }
+        })
+
+        
+
     </script>
 }
 
-<div id="world-map" style="height: 100%"></div>
+<div id="world-map"></div>
 
 
 <div id="search_panel">
