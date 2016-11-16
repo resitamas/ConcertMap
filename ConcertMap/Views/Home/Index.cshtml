@@ -89,7 +89,7 @@
         function upcomingChanged(cb) {
 
             var isChecked = $(cb).prop("checked");
-            var isCheckedPast = $("#past").prop("checked");
+            var isCheckedPast = $("#isPast").prop("checked");
 
             if (isChecked) {
                 if (!isCheckedPast)
@@ -108,7 +108,7 @@
         function pastChanged(cb) {
 
             var isChecked = $(cb).prop("checked");
-            var isCheckedUpcoming = $("#upcoming").prop("checked");
+            var isCheckedUpcoming = $("#isUpcoming").prop("checked");
 
             if (isChecked) {
                 if (!isCheckedUpcoming)
