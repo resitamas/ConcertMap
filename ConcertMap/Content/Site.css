@@ -115,6 +115,7 @@ textarea {
     font-size: 13px;
     display: none;
     text-align: center;
+    opacity: 0.94;
 }
 
 #hideStat_button {
@@ -141,4 +142,16 @@ input:read-only {
     width: 320px;
     margin: 0 auto;
     overflow-y:scroll;
+}
+
+#artistNameOnMap {
+    position: absolute;
+    top: 0;
+    right : 0;
+    font-size: 50px;
+    margin-right: 20px;
+    margin-top: 5px;
+    font-family: Roboto;
+    font-style: italic;
+    opacity: 0.6;
 }

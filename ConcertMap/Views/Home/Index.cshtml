@@ -108,12 +108,12 @@
                 @Html.EditorFor(model => model.toDate, new { @type = "date", id = "toDate" })
                 <br />
                
-                <input class="btn" type="submit" value="Search" id="search_button" />
+                <input class="btn-large z-depth-3" type="submit" value="Search" id="search_button" />
             </p>
         } 
     </div>
 
-    <button onclick="hide()" id="hide_button" class="button">Hide</button>
+    <button onclick="hide()" id="hide_button" class="btn waves-light">Hide</button>
 </div>
 
 <div id="stat_panel" class="z-depth-5">
@@ -139,11 +139,15 @@
     </div>
     </div>
 
-    <button onclick="hideStat()" id="hideStat_button" class="button">Hide</button>
+    <button onclick="hideStat()" id="hideStat_button" class="btn waves-light">Hide</button>
 </div>
 
 <a class="waves-effect waves-light btn showSearchPanelButton z-depth-5" onclick="show()" id="show_button">Search</a>
 <a class="waves-effect waves-light btn showStatPanelButton z-depth-5" onclick="showStat()" id="stat_button">Stat</a>
+
+<div id="artistNameOnMap">
+    @Model.ArtistName
+</div>
 
 @*<button onclick="show()" id="show_button" class="button showSearchPanelButton">Search</button>*@
 
