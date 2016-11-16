@@ -18,7 +18,7 @@ namespace ConcertMap.Controllers
         public HomeController()
         {
             service = new ConcertService.Rest.RestHelper();
-        }
+       } 
         
         public ActionResult Index(string artist = null, DateTime? fromDate = null, DateTime? toDate = null, bool upcoming = true, bool past = true)
         {
