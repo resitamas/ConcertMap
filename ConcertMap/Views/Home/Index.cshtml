@@ -8,7 +8,6 @@
 
 @section Scripts {
 
-    <script type="text/javascript" src="@Url.Content("/Scripts/scripts.js")"></script>
     <script>
 
 
@@ -16,6 +15,7 @@
 
             $("#fromDate").attr('readonly',true);
             $("#toDate").attr('readonly',true);
+
 
             @{
 
@@ -69,19 +69,33 @@
 
             $('input[type=hidden]').each(function (index, element) {
                 $(element).appendTo($(element).parent());
-        });
+            });
+
 
         });
+
+        //$(clickDiv).click(function (event) {
+            
+        //    if ($('#search_panel').is(":visible")) {
+        //        $("#show_button").show();
+        //        $("#search_panel").hide("drop", { direction: "left" }, "slow");
+        //    }
+            
+        //    if ($('#stat_panel').is(":visible")) {
+        //        $("#stat_button").show();
+        //        $("#stat_panel").hide("drop", { direction: "right", complete: statPanelHided }, "slow");
+        //    }
+        //})
 
     </script>
 }
 
-<div id="world-map" style="height: 100%"></div>
+<div id="world-map"></div>
 
 
 <div id="search_panel">
     <div id="title">Search</div>
-  
+
 
     <div id="search_form">
         @using (Html.BeginForm("Search", "Home", FormMethod.Get))
@@ -107,17 +121,17 @@
                 @Html.LabelFor(m => m.toDate)
                 @Html.EditorFor(model => model.toDate, new { @type = "date", id = "toDate" })
                 <br />
-               
+
                 <input class="btn-large z-depth-3" type="submit" value="Search" id="search_button" />
             </p>
-        } 
+        }
     </div>
 
     <button onclick="hide()" id="hide_button" class="btn waves-light">Hide</button>
 </div>
 
 <div id="stat_panel" class="z-depth-5">
-    
+
     <div id="stat_title"><span>Statistics</span></div>
 
     <ul class="tabs tabs-fixed-width">
@@ -136,7 +150,7 @@
     </div>
     <div class="stats" id="cityStat">
         <div class="charts" id="cityChart">
-    </div>
+        </div>
     </div>
 
     <button onclick="hideStat()" id="hideStat_button" class="btn waves-light">Hide</button>
@@ -147,6 +161,10 @@
 
 <div id="artistNameOnMap">
     @Model.ArtistName
+</div>
+
+<div id="clickDiv">
+
 </div>
 
 @*<button onclick="show()" id="show_button" class="button showSearchPanelButton">Search</button>*@

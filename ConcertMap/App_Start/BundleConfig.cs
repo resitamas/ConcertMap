@@ -49,6 +49,10 @@ namespace ConcertMap
             bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
                       "~/Scripts/materialize.js"));
 
+
+            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
+                        "~/Scripts/scripts.js"));
+
         }
     }
 }

@@ -54,6 +54,7 @@ namespace ConcertMap.Controllers
                         model.fromDate = DateTime.Now;
                         model.toDate = DateTime.Now;
                     }
+                    
                 }
                 else
                 {
@@ -61,21 +62,22 @@ namespace ConcertMap.Controllers
                     model.toDate = Convert.ToDateTime("2100-01-01 00:00:01");
                     model.isUpcoming = true;
                     model.isPast = true;
-                }
-                
-                return View(model);
+
+                    return View(model);
+                }  
+            }
+            else
+            {
+                model.ArtistName = artist;
+                model.isUpcoming = upcoming;
+                model.isPast = past;
             }
 
-           List<Event> eventList = new List<Event>(); ;
+           List<Event> eventList = new List<Event>(); 
 
             try
             {
-                if (fromDate != null && toDate != null)
-                {
-                    eventList = service.GetEvents(artist, fromDate, toDate);
-                }
-
-                   eventList = service.GetEvents(artist, fromDate, toDate);
+                eventList = service.GetEvents(model.ArtistName, model.fromDate, model.toDate);
 
             }
             catch (ConcertException ex)
@@ -89,19 +91,14 @@ namespace ConcertMap.Controllers
             }
 
             model.events = eventList;
-            model.ArtistName = artist;
-            model.isUpcoming = upcoming;
-            model.isPast = past;
-
-
+           
             HttpCookie cookie = new HttpCookie("search");
             cookie.Values["artistName"] = model.ArtistName;
             cookie.Values["isPast"] = model.isPast.ToString();
             cookie.Values["isUpcoming"] = model.isUpcoming.ToString();
             cookie.Expires = DateTime.Now.AddDays(1);
             Response.Cookies.Add(cookie);
-
-
+            
             return View(model);
         }
 

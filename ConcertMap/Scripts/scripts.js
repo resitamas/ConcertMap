@@ -1,4 +1,27 @@
-﻿function hide() {
+﻿$(function () {
+
+    $(window).click(function (evt) {
+        var x1 = evt.pageX - $('#search_panel').width() - 30;
+        var x2 = $(window).width() - $('#stat_panel').width() - 30 - evt.pageX;
+
+        if (x1 > 0 && x2 > 0) {
+
+            if ($('#search_panel').is(":visible")) {
+                $("#show_button").show();
+                $("#search_panel").hide("drop", { direction: "left" }, "slow");
+            }
+
+            if ($('#stat_panel').is(":visible")) {
+                $("#stat_button").show();
+                $("#stat_panel").hide("drop", { direction: "right", complete: statPanelHided }, "slow");
+            }
+        }
+
+    });
+
+})
+
+function hide() {
     $("#show_button").show();
     $("#search_panel").hide("drop", { direction: "left" }, "slow");
 
@@ -162,3 +185,7 @@ function getCurrentDate() {
 
     return today;
 }
+
+
+
+
