@@ -86,7 +86,7 @@ namespace ConcertMap.Controllers
             catch (ConcertException)
             {
                 if (isSearched)
-                {
+            {
                     model.NotFound = true;
                 }
               
