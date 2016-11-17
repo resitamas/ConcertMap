@@ -16,12 +16,17 @@ namespace ConcertMap.App_Code.Helper
         {
 
             List<Marker> markers = new List<Marker>();
+            List<string> cities = new List<string>();
 
             if (events != null)
             {
                 foreach (var e in events)
                 {
-                    markers.Add(new Marker() { Name = e.Title, Lat = e.Venue.Lat, Long = e.Venue.Long });
+                    if (!cities.Contains(e.Venue.City))
+                    {
+                        markers.Add(new Marker() { Name = e.Title, Lat = e.Venue.Lat, Long = e.Venue.Long });
+                        cities.Add(e.Venue.City);
+                    }
                 }
             }
 
