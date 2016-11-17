@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\Helper\MapManager.cs" />
+    <Content Include="App_Code\Helper\Position.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

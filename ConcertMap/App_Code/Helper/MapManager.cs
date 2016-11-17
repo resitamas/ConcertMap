@@ -9,6 +9,7 @@ using System.Web;
 
 namespace ConcertMap.App_Code.Helper
 {
+    
     public class MapManager
     {
 
@@ -16,17 +17,45 @@ namespace ConcertMap.App_Code.Helper
         {
 
             List<Marker> markers = new List<Marker>();
-            List<string> cities = new List<string>();
+            Dictionary<string, Position> cities = new Dictionary<string, Position>();
+            Dictionary<string, List<string>> citiesConcerts = new Dictionary<string, List<string>>();
 
             if (events != null)
             {
                 foreach (var e in events)
                 {
-                    if (!cities.Contains(e.Venue.City))
+                    if (!cities.ContainsKey(e.Venue.City))
                     {
-                        markers.Add(new Marker() { Name = e.Title, Lat = e.Venue.Lat, Long = e.Venue.Long });
-                        cities.Add(e.Venue.City);
+                        cities.Add(e.Venue.City, new Position(e.Venue.Lat,e.Venue.Long));
+                        List<string> concerts = new List<string>();
+                        concerts.Add(e.Title);
+                        citiesConcerts.Add(e.Venue.City, concerts);
                     }
+                    else
+                    {
+                        List<string> concerts = new List<string>();
+                        concerts = citiesConcerts[e.Venue.City];
+                        concerts.Add(e.Title);
+                        citiesConcerts[e.Venue.City] = concerts;
+                    }
+                }
+
+                double latitude = 0;
+                double longitude = 0;
+                string label = "";
+
+                foreach (var city in cities)
+                {
+                    label = "";
+                    latitude = city.Value.latitude;
+                    longitude = city.Value.longitude;
+
+                    foreach (var concert in citiesConcerts[city.Key])
+                    {
+                        label = label + concert + "\r\n";
+                        
+                    }
+                    markers.Add(new Marker() { Name = label, Lat = latitude, Long = longitude });
                 }
             }
 
