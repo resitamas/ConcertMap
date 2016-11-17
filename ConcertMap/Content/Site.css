@@ -1,8 +1,6 @@
 ﻿body {
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-bottom: 15px;
-    padding-bottom: 15px;
     min-height: 100%;
     background-color: #A1ABB5;
     font-family: Roboto;
@@ -161,3 +159,15 @@ input:read-only {
     height: 100%;
 }
 
+.input-field div.error{
+    position: relative;
+    top: -1rem;
+    left: 0rem;
+    font-size: 0.8rem;
+    color:#FF4081;
+    -webkit-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    transform: translateY(0%);
+    display: block; 
+  }

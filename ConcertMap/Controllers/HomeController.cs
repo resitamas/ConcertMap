@@ -20,7 +20,7 @@ namespace ConcertMap.Controllers
             service = new ConcertService.Rest.RestHelper();
        } 
         
-        public ActionResult Index(string artist = null, DateTime? fromDate = null, DateTime? toDate = null, bool upcoming = true, bool past = true)
+        public ActionResult Index(string artist = null, DateTime? fromDate = null, DateTime? toDate = null, bool upcoming = true, bool past = true, bool isSearched = false)
         {
             Events model = new Events();
 
@@ -62,6 +62,7 @@ namespace ConcertMap.Controllers
                     model.toDate = Convert.ToDateTime("2100-01-01 00:00:01");
                     model.isUpcoming = true;
                     model.isPast = true;
+                    model.NotFound = false;
 
                     return View(model);
                 }  
@@ -71,6 +72,8 @@ namespace ConcertMap.Controllers
                 model.ArtistName = artist;
                 model.isUpcoming = upcoming;
                 model.isPast = past;
+                model.fromDate = fromDate.Value;
+                model.toDate = toDate.Value;
             }
 
            List<Event> eventList = new List<Event>(); 
@@ -80,9 +83,12 @@ namespace ConcertMap.Controllers
                 eventList = service.GetEvents(model.ArtistName, model.fromDate, model.toDate);
 
             }
-            catch (ConcertException ex)
+            catch (ConcertException)
             {
-                //Nincs ilyen előadó
+                if (isSearched)
+                {
+                    model.NotFound = true;
+                }
               
             }
             catch (Exception)
@@ -120,7 +126,7 @@ namespace ConcertMap.Controllers
         [HttpGet]
         public ActionResult Search(Events m)
         {
-            return RedirectToAction("Index", "Home", new { artist = m.ArtistName, fromDate = m.fromDate.ToString("yyyy-MM-dd"), toDate = m.toDate.ToString("yyyy-MM-dd"), upcoming = m.isUpcoming, past = m.isPast });
+            return RedirectToAction("Index", "Home", new { artist = m.ArtistName, fromDate = m.fromDate.ToString("yyyy-MM-dd"), toDate = m.toDate.ToString("yyyy-MM-dd"), upcoming = m.isUpcoming, past = m.isPast, isSearched = true });
         }
     }
     

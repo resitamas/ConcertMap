@@ -34,5 +34,7 @@ namespace ConcertMap.Models
         [DisplayName("Choose dates")]
         public bool dates { get; set; }
 
+        public bool NotFound { get; set; }
+
     }
 }

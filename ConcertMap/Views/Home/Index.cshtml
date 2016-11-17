@@ -75,12 +75,12 @@
         });
 
         //$(clickDiv).click(function (event) {
-            
+
         //    if ($('#search_panel').is(":visible")) {
         //        $("#show_button").show();
         //        $("#search_panel").hide("drop", { direction: "left" }, "slow");
         //    }
-            
+
         //    if ($('#stat_panel').is(":visible")) {
         //        $("#stat_button").show();
         //        $("#stat_panel").hide("drop", { direction: "right", complete: statPanelHided }, "slow");
@@ -92,10 +92,12 @@
 
 <div id="world-map"></div>
 
+@{
+    string display = @Model.NotFound ? "display:block" : "display:none";
+}
 
-<div id="search_panel">
+<div id="search_panel" style="@display">
     <div id="title">Search</div>
-
 
     <div id="search_form">
         @using (Html.BeginForm("Search", "Home", FormMethod.Get))
@@ -103,8 +105,14 @@
             <p>
                 <div class="input-field">
                     @Html.LabelFor(m => m.ArtistName)
-                    @Html.TextBoxFor(model => model.ArtistName) <br />
+                    @Html.TextBoxFor(model => model.ArtistName)
+
+                    <div class="" style="@display">
+                        <div id="artistError" class="error">Artist not found</div>
+                    </div>
+
                 </div>
+
 
                 @Html.CheckBoxFor(m => m.isUpcoming, new { @checked = "checked", id = "isUpcoming", onclick = "upcomingChanged(this)" })
                 @Html.LabelFor(m => m.isUpcoming)
@@ -159,15 +167,9 @@
 <a class="waves-effect waves-light btn showSearchPanelButton z-depth-5" onclick="show()" id="show_button">Search</a>
 <a class="waves-effect waves-light btn showStatPanelButton z-depth-5" onclick="showStat()" id="stat_button">Stat</a>
 
-<div id="artistNameOnMap">
-    @Model.ArtistName
-</div>
-
-<div id="clickDiv">
-
-</div>
-
-@*<button onclick="show()" id="show_button" class="button showSearchPanelButton">Search</button>*@
-
-@*<button onclick="showStat()" id="stat_button" class="button showStatPanelButton">Stat</button>*@
-
+@if (!Model.NotFound)
+{
+    <div id="artistNameOnMap">
+        @Model.ArtistName
+    </div>
+}
