@@ -71,6 +71,8 @@ namespace ConcertMap.Controllers
                 model.ArtistName = artist;
                 model.isUpcoming = upcoming;
                 model.isPast = past;
+                model.toDate = Convert.ToDateTime(toDate);
+                model.fromDate = Convert.ToDateTime(fromDate);
             }
 
            List<Event> eventList = new List<Event>(); 
