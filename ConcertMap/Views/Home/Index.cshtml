@@ -59,7 +59,6 @@
                 series: {
                     regions: [{
                         values: concertDataSerialized,
-                        //scale: ['#33F259', '#176326'],
                         scale: ['#26a69a', '#004d40'],
                         normalizeFunction: 'polynomial',
                         attribute: 'fill'
@@ -73,19 +72,6 @@
 
 
         });
-
-        //$(clickDiv).click(function (event) {
-
-        //    if ($('#search_panel').is(":visible")) {
-        //        $("#show_button").show();
-        //        $("#search_panel").hide("drop", { direction: "left" }, "slow");
-        //    }
-
-        //    if ($('#stat_panel').is(":visible")) {
-        //        $("#stat_button").show();
-        //        $("#stat_panel").hide("drop", { direction: "right", complete: statPanelHided }, "slow");
-        //    }
-        //})
 
     </script>
 }
@@ -170,6 +156,6 @@
 @if (!Model.NotFound)
 {
     <div id="artistNameOnMap">
-        @Model.ArtistName
+        @Model.ArtistName.ToUpper()
     </div>
 }

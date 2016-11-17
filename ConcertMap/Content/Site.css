@@ -81,8 +81,9 @@ textarea {
 
 #title {
     text-align:center;
-    font-size: 20px;
+    font-size: 40px;
     padding: 20px;
+    color: #333333;
 }
 
 .showSearchPanelButton{
@@ -128,8 +129,9 @@ input:read-only {
 }
 
 #stat_title {
-    font-size: 20px;
+    font-size: 40px;
     padding: 20px;
+    color: #333333;
 }
 
 .stats {
@@ -140,7 +142,11 @@ input:read-only {
     height: 500px;
     width: 320px;
     margin: 0 auto;
-    overflow-y:scroll;
+    /*overflow-y:scroll;*/
+}
+
+#regionStat, #cityStat, #countryStat {
+    overflow-y: scroll;
 }
 
 #artistNameOnMap {

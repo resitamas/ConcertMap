@@ -120,13 +120,13 @@ function createChart(containerName, titleText, dataPoints, height) {
     var chart = new CanvasJS.Chart(containerName, {
         title: {
             text: titleText,
-            fontFamily: "Verdana",
-            fontColor: "Peru",
+            fontFamily: "Roboto",
+            fontColor: "#B88A99",
             fontSize: 28
 
         },
         width: 300,
-        height: height,
+        height: height + 20,
         animationEnabled: true,
         backgroundColor: '#edf7ee',
         axisY: {
@@ -139,19 +139,17 @@ function createChart(containerName, titleText, dataPoints, height) {
             tickThickness: 0,
             lineThickness: 0,
             labelFontSize: 10,
-            labelFontColor: "Peru",
+            labelFontColor: "#333333",
             interval: 1
         },
         data: [
         {
-            indexLabelFontSize: 12,
-            toolTipContent: "<span style='\"'color: {color};'\"'><strong>{label}</strong></span>",
-
-            indexLabelPlacement: "inside",
-            indexLabelWrap: true,
-            indexLabelFontColor: "white",
-            indexLabelFontWeight: 100,
-            indexLabelFontFamily: "Verdana",
+            indexLabelFontSize: 15,
+            toolTipContent: "<span style='\"'color: #B88A99;'\"'><strong>{label}: {y}</strong></span>",
+            indexLabelPlacement: "outside",
+            indexLabelFontColor: "#B88A99",
+            indexLabelFontWeight: 300,
+            indexLabelFontFamily: "Roboto",
             color: "#62C9C3",
             type: "bar",
             dataPoints: dataPoints

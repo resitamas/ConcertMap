@@ -28,7 +28,7 @@ namespace ConcertMap.Models
         {
             get
             {
-                return Name + ": " + Y;
+                return Name;
             }
         }
 
