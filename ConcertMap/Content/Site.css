@@ -33,20 +33,21 @@ textarea {
 
 #hide_button {
     position: absolute;
-    top:50%;
+    top: 75%;
     right:0;   
 }
 
 #search_button {
     position: absolute;
-    right:50%;
-    margin-top: 40px;
+    left: 5%;
+    top: 75%;
+    background-color: #B88A99
 }
 
 
 #show_button {
     position: absolute;
-    top:50%;
+    top:75%;
     left:0;
     display: inline-block;
 }
@@ -98,7 +99,7 @@ textarea {
 
 #stat_button {
     position: absolute;
-    top:50%;
+    top:75%;
     right:0;
     display:inline-block;
 }
@@ -109,7 +110,7 @@ textarea {
     top: 0;
     height: 100%;
     width: 500px;
-    background: #edf7ee;
+    background: #e0f7fa;
     z-index: 50;
     padding: 10px;
     font-size: 13px;
@@ -121,7 +122,7 @@ textarea {
 #hideStat_button {
     position: absolute;
     left:0;
-    top:50%;
+    top:75%;
 }
 
 input:read-only { 
