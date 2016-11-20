@@ -47,13 +47,6 @@
                 container: $('#world-map'),
                 map: 'world_mill',
                 normalizeFunction: 'polynomial',
-                markerStyle: {
-                    initial: {
-                        fill: '#B88A99',
-                        stroke: '#805563',
-                        r: 3
-                    }
-                },
                 backgroundColor: '#A1ABB5',
                 markers: markersDataSerialized,
                 series: {
@@ -65,6 +58,8 @@
                     }]
                 }
             });
+
+            mapObj.series.markers.
 
             $('input[type=hidden]').each(function (index, element) {
                 $(element).appendTo($(element).parent());
@@ -79,10 +74,11 @@
 <div id="world-map"></div>
 
 @{
-    string display = @Model.NotFound ? "display:block" : "display:none";
+    string displayArtist = Model.NotFound && Model.ArtistName != null ? "display:block" : "display:none";
+    string displayPanel = Model.NotFound ? "display:block" : "display:none";
 }
 
-<div id="search_panel" style="@display">
+<div id="search_panel" style="@displayPanel">
     <div id="title">Search</div>
 
     <div id="search_form">
@@ -93,7 +89,7 @@
                     @Html.LabelFor(m => m.ArtistName)
                     @Html.TextBoxFor(model => model.ArtistName)
 
-                    <div class="" style="@display">
+                    <div class="" style="@displayArtist">
                         <div id="artistError" class="error">Artist not found</div>
                     </div>
 

@@ -1,4 +1,5 @@
-﻿using ConcertMap.Controllers;
+﻿using ConcertMap.App_Code.Helper;
+using ConcertMap.Controllers;
 using ConcertMap.Models;
 using ConcertService.Models;
 using CountriesService;
@@ -55,11 +56,28 @@ namespace ConcertMap.App_Code.Helper
                         label = label + concert + "\r\n";
                         
                     }
-                    markers.Add(new Marker() { Name = label, Lat = latitude, Long = longitude });
+
+                    MarkerStyle style = new MarkerStyle() { Color = "#B88A99", Border = "#805563" , Sugar = GetSugar(citiesConcerts[city.Key].Count) };
+
+                    markers.Add(new Marker() { Name = label, Lat = latitude, Long = longitude, Style = style });
                 }
             }
 
             return markers;
+        }
+
+        private static double GetSugar(int count)
+        {
+
+            double sugar = 3 + count * 0.5;
+
+            if (sugar >= 6)
+            {
+                return 6;
+            }
+
+            return sugar;
+
         }
 
         public static Dictionary<string, double> CreateCountryData(List<Event> events)

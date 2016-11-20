@@ -18,8 +18,8 @@ namespace ConcertMap.Controllers
         public HomeController()
         {
             service = new ConcertService.Rest.RestHelper();
-       } 
-        
+        }
+
         public ActionResult Index(string artist = null, DateTime? fromDate = null, DateTime? toDate = null, bool upcoming = true, bool past = true, bool isSearched = false)
         {
             Events model = new Events();
@@ -54,7 +54,7 @@ namespace ConcertMap.Controllers
                         model.fromDate = DateTime.Now;
                         model.toDate = DateTime.Now;
                     }
-                    
+
                 }
                 else
                 {
@@ -62,10 +62,10 @@ namespace ConcertMap.Controllers
                     model.toDate = Convert.ToDateTime("2100-01-01 00:00:01");
                     model.isUpcoming = true;
                     model.isPast = true;
-                    model.NotFound = false;
+                    model.NotFound = true;
 
                     return View(model);
-                }  
+                }
             }
             else
             {
@@ -76,7 +76,7 @@ namespace ConcertMap.Controllers
                 model.toDate = toDate.Value;
             }
 
-           List<Event> eventList = new List<Event>(); 
+            List<Event> eventList = new List<Event>();
 
             try
             {
@@ -86,10 +86,10 @@ namespace ConcertMap.Controllers
             catch (ConcertException)
             {
                 if (isSearched)
-            {
+                {
                     model.NotFound = true;
                 }
-              
+
             }
             catch (Exception)
             {
@@ -97,14 +97,15 @@ namespace ConcertMap.Controllers
             }
 
             model.events = eventList;
-           
+            model.NotFound = false;
+
             HttpCookie cookie = new HttpCookie("search");
             cookie.Values["artistName"] = model.ArtistName;
             cookie.Values["isPast"] = model.isPast.ToString();
             cookie.Values["isUpcoming"] = model.isUpcoming.ToString();
             cookie.Expires = DateTime.Now.AddDays(1);
             Response.Cookies.Add(cookie);
-            
+
             return View(model);
         }
 
@@ -129,5 +130,5 @@ namespace ConcertMap.Controllers
             return RedirectToAction("Index", "Home", new { artist = m.ArtistName, fromDate = m.fromDate.ToString("yyyy-MM-dd"), toDate = m.toDate.ToString("yyyy-MM-dd"), upcoming = m.isUpcoming, past = m.isPast, isSearched = true });
         }
     }
-    
+
 }

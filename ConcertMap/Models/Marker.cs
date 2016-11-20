@@ -27,6 +27,8 @@ namespace ConcertMap.Models
         [JsonProperty("name")]
         public string Name { get; set; }
 
+        [JsonProperty("style")]
+        public MarkerStyle Style { get; set; }
 
     }
 }
