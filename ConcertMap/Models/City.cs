@@ -6,12 +6,13 @@ using System.Web;
 
 namespace ConcertMap.Models
 {
+     
     public class City
     {
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("venue")]
-        public Dictionary<string,List<string>> VenueDictionary { get; set; }
+        [JsonProperty("concerts")]
+        public List<string> Concerts { get; set; }
     }
 }

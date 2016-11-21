@@ -40,6 +40,7 @@
             localStorage.setItem("cityStatCount",@stat.CityStat.Count);
             localStorage.setItem("countryStatCount",@stat.CountryStat.Count);
             localStorage.setItem("regionStatCount",@stat.RegionStat.Count);
+            localStorage.setItem("markers",JSON.stringify(markersDataSerialized));
 
 
             var mapObj = new jvm.Map({
@@ -57,9 +58,20 @@
                         attribute: 'fill'
                     }]
                 },
-                //onMarkerTipShow: function(event, label, index){
-                //    label.html('xxxx<br/>yyyyy<br/>');
-                //}
+                onMarkerTipShow: function(event, label, index){
+
+                    var city = markersDataSerialized[index]["name"];
+
+                    var labelname = city["name"]+":<br/>";
+
+                    $.each(city["concerts"], function (i, value) {
+                        labelname += "<span style='padding-left:20px'>" + value +"</span><br/>";
+                    });
+
+                   
+
+                    label.html(labelname);
+                }
             });
 
             $('input[type=hidden]').each(function (index, element) {

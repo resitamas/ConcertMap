@@ -29,37 +29,35 @@ namespace ConcertMap.App_Code.Helper
                     {
                         cities.Add(e.Venue.City, new Position(e.Venue.Lat,e.Venue.Long));
                         List<string> concerts = new List<string>();
-                        concerts.Add(e.Title);
+                        concerts.Add(e.Date.ToString("yyyy-MM-dd") + " - " + e.Title);
                         citiesConcerts.Add(e.Venue.City, concerts);
                     }
                     else
                     {
                         List<string> concerts = new List<string>();
                         concerts = citiesConcerts[e.Venue.City];
-                        concerts.Add(e.Title);
+                        concerts.Add(e.Date.ToString("yyyy-MM-dd") +" - "+ e.Title);
                         citiesConcerts[e.Venue.City] = concerts;
                     }
                 }
 
                 double latitude = 0;
                 double longitude = 0;
-                string label = "";
 
                 foreach (var city in cities)
                 {
-                    label = "";
+                    City city1 = new City { Name = city.Key, Concerts = new List<string>() };
                     latitude = city.Value.latitude;
                     longitude = city.Value.longitude;
 
                     foreach (var concert in citiesConcerts[city.Key])
                     {
-                        label = label + concert + "\r\n";
-                        
+                        city1.Concerts.Add(concert);
                     }
 
                     MarkerStyle style = new MarkerStyle() { Color = "#B88A99", Border = "#805563" , Sugar = GetSugar(citiesConcerts[city.Key].Count) };
 
-                    markers.Add(new Marker() { Name = label, Lat = latitude, Long = longitude, Style = style });
+                    markers.Add(new Marker() { Name = city1, Lat = latitude, Long = longitude, Style = style });
                 }
             }
 
