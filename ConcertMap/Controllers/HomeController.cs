@@ -81,7 +81,7 @@ namespace ConcertMap.Controllers
             try
             {
                 eventList = service.GetEvents(model.ArtistName, model.fromDate, model.toDate);
-
+                model.NotFound = false;
             }
             catch (ConcertException)
             {
@@ -93,11 +93,11 @@ namespace ConcertMap.Controllers
             }
             catch (Exception)
             {
-                //Más kívétel
+                model.NotFound = true;
             }
 
             model.events = eventList;
-            model.NotFound = false;
+            //model.NotFound = false;
 
             HttpCookie cookie = new HttpCookie("search");
             cookie.Values["artistName"] = model.ArtistName;

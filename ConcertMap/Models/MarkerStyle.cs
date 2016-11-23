@@ -8,7 +8,6 @@ namespace ConcertMap.Models
         [JsonProperty("fill")]
         public string Color { get; set; }
 
-
         [JsonProperty("r")]
         public double Sugar { get; set; }
 

@@ -7,7 +7,8 @@
 }
 
 html {
-    height: 100%
+    height: 100%;
+    /*overflow: hidden;*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -137,16 +138,19 @@ input:read-only {
 
 .stats {
     margin-top:10px;
+    height: 100%;
+    overflow: auto;
+    margin-bottom: 10px;
 }
 
 .charts {
-    height: 500px;
+    height: 400px;
     width: 320px;
     margin: 0 auto;
-    /*overflow-y:scroll;*/
 }
 
 #regionStat, #cityStat, #countryStat {
+    height: 400px;
     overflow-y: scroll;
 }
 

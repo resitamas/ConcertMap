@@ -89,6 +89,7 @@
 @{
     string displayArtist = Model.NotFound && Model.ArtistName != null ? "display:block" : "display:none";
     string displayPanel = Model.NotFound ? "display:block" : "display:none";
+    string displayButton = Model.NotFound ? "display:none" : "display:block";
 }
 
 <div id="search_panel" style="@displayPanel">
@@ -125,7 +126,7 @@
                 @Html.EditorFor(model => model.toDate, new { @type = "date", id = "toDate" })
                 <br />
 
-                <input class="btn-large z-depth-3" type="submit" value="Search" id="search_button" />
+                <input class="btn-large z-depth-3" type="submit" value="Search" id="search_button"  />
             </p>
         }
     </div>
@@ -137,7 +138,7 @@
 
     <div id="stat_title"><span>Statistics</span></div>
 
-    <ul class="tabs tabs-fixed-width">
+    <ul class="tabs tabs-fixed-width" id="tabBar">
         <li class="tab"><a href="#regionStat">Region stat</a></li>
         <li class="tab"><a href="#countryStat">Country stat</a></li>
         <li class="tab"><a href="#cityStat">City Stat</a></li>
@@ -160,7 +161,7 @@
 
 </div>
 
-<a class="waves-effect waves-light btn showSearchPanelButton z-depth-5" onclick="show()" id="show_button">Search</a>
+<a class="waves-effect waves-light btn showSearchPanelButton z-depth-5" onclick="show()" id="show_button" style="@displayButton">Search</a>
 <a class="waves-effect waves-light btn showStatPanelButton z-depth-5" onclick="showStat()" id="stat_button">Stat</a>
 
 @if (!Model.NotFound)

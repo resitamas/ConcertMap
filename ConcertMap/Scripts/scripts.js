@@ -1,5 +1,6 @@
 ﻿$(function () {
 
+
     $(window).click(function (evt) {
         var x1 = evt.pageX - $('#search_panel').width() - 30;
         var x2 = $(window).width() - $('#stat_panel').width() - 30 - evt.pageX;
@@ -19,7 +20,24 @@
 
     });
 
+    $(window).resize(function () {
+
+        resizeStat();
+
+    });
+
 })
+
+function resizeStat() {
+
+    var positionTop = $("#tabBar").position().top + $("#tabBar").height() + 20;
+    var windowHeight = $(window).height();
+
+
+    $("#regionStat, #cityStat, #countryStat").height(windowHeight - positionTop);
+    $(".charts").height(windowHeight - positionTop);
+
+}
 
 function hide() {
     $("#show_button").show();
@@ -109,6 +127,8 @@ function statPanelShowed() {
     countryChart.render();
     cityChart.render();
 
+    resizeStat();
+
 }
 
 function getHeight(count) {
@@ -128,7 +148,7 @@ function createChart(containerName, titleText, dataPoints, height) {
         width: 300,
         height: height + 20,
         animationEnabled: true,
-        backgroundColor: '#edf7ee',
+        backgroundColor: '#e0f7fa',
         axisY: {
             tickThickness: 0,
             lineThickness: 0,
