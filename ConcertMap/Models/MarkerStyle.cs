@@ -9,7 +9,7 @@ namespace ConcertMap.Models
         public string Color { get; set; }
 
         [JsonProperty("r")]
-        public double Sugar { get; set; }
+        public double Radius { get; set; }
 
         [JsonProperty("stroke")]
         public string Border { get; set; }

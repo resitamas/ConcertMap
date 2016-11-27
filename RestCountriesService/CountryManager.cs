@@ -32,7 +32,5 @@ namespace CountriesService
             return countries;
         }
 
-
-
     }
 }

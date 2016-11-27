@@ -11,6 +11,7 @@
 /// <reference path="jquery-ui-1.12.1.js" />
 /// <reference path="jquery-ui-1.12.1.min.js" />
 /// <reference path="jvectormaps/world-iso-a2/jquery-jvectormap-world-mill-en-us.min.js" />
+/// <reference path="jVectorMaps/world-ISO-A3/jquery-jvectormap-world-mill-en-US.js" />
 /// <reference path="jvectormaps/world-iso-a3/jquery-jvectormap-world-mill-en-us.min.js" />
 /// <reference path="jvectormaps/world-timezone/jquery-jvectormap-world-timezones.min.js" />
 /// <reference path="materialize.js" />

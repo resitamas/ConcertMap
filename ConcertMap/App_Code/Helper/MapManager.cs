@@ -55,7 +55,7 @@ namespace ConcertMap.App_Code.Helper
                         city1.Concerts.Add(concert);
                     }
 
-                    MarkerStyle style = new MarkerStyle() { Color = "#B88A99", Border = "#805563" , Sugar = GetSugar(citiesConcerts[city.Key].Count) };
+                    MarkerStyle style = new MarkerStyle() { Color = "#B88A99", Border = "#805563" , Radius = GetSugar(citiesConcerts[city.Key].Count) };
 
                     markers.Add(new Marker() { Name = city1, Lat = latitude, Long = longitude, Style = style });
                 }
@@ -129,21 +129,21 @@ namespace ConcertMap.App_Code.Helper
                     //Create country stat
                     stat.CountryStat.Add(new ChartModel() {
                         Y = value,
-                        Name = countries.Where(c => c.ISO3 == d.Key).First().CommonName,
+                        Label = countries.Where(c => c.ISO3 == d.Key).First().CommonName,
                     }); 
 
                     //Create region stat
                     var region = countries.Where(c => c.ISO3 == d.Key).First().Region;
 
-                    if (stat.RegionStat.Exists(r => r.Name == region))
+                    if (stat.RegionStat.Exists(r => r.Label == region))
                     {
-                        stat.RegionStat.Find(r => r.Name == region).Y += Convert.ToInt32(d.Value);
+                        stat.RegionStat.Find(r => r.Label == region).Y += Convert.ToInt32(d.Value);
                     }
                     else
                     {
                         stat.RegionStat.Add(new ChartModel() {
                             Y = 1,
-                            Name = region,
+                            Label = region,
                         });
                     }
                 }
@@ -158,15 +158,15 @@ namespace ConcertMap.App_Code.Helper
                     {
                         var city = e.Venue.City;
 
-                        if (stat.CityStat.Exists(c => c.Name == city))
+                        if (stat.CityStat.Exists(c => c.Label == city))
                         {
-                            stat.CityStat.Find(c => c.Name == city).Y ++;
+                            stat.CityStat.Find(c => c.Label == city).Y ++;
                         }
                         else
                         {
                             stat.CityStat.Add(new ChartModel() {
                                 Y = 1,
-                                Name = city
+                                Label = city
                             });
                         }
                     }

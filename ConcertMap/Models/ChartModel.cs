@@ -20,17 +20,9 @@ namespace ConcertMap.Models
             }
         }
 
-        [JsonIgnore]
-        public string Name { get; set; }
 
         [JsonProperty("label")]
-        public string Label
-        {
-            get
-            {
-                return Name;
-            }
-        }
+        public string Label { get; set; }
 
     }
 }
