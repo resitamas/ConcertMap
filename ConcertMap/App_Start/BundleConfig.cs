@@ -5,6 +5,7 @@ namespace ConcertMap
 {
     public class BundleConfig
     {
+
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
@@ -52,6 +53,7 @@ namespace ConcertMap
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
                         "~/Scripts/scripts.js"));
+
 
         }
     }

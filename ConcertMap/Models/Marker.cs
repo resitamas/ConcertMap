@@ -25,7 +25,7 @@ namespace ConcertMap.Models
         }
 
         [JsonProperty("name")]
-        public City Name { get; set; }
+        public City City { get; set; }
 
         [JsonProperty("style")]
         public MarkerStyle Style { get; set; }

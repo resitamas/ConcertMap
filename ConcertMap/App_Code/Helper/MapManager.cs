@@ -23,7 +23,7 @@ namespace ConcertMap.App_Code.Helper
 
             if (events != null)
             {
-                foreach (var e in events)
+                foreach (var e in events.OrderByDescending(e => e.Date))
                 {
                     if (!cities.ContainsKey(e.Venue.City))
                     {
@@ -57,7 +57,7 @@ namespace ConcertMap.App_Code.Helper
 
                     MarkerStyle style = new MarkerStyle() { Color = "#B88A99", Border = "#805563" , Radius = GetSugar(citiesConcerts[city.Key].Count) };
 
-                    markers.Add(new Marker() { Name = city1, Lat = latitude, Long = longitude, Style = style });
+                    markers.Add(new Marker() { City = city1, Lat = latitude, Long = longitude, Style = style });
                 }
             }
 
